@@ -6,9 +6,6 @@
         xmlns:local="clr-namespace:RecipeBook"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1438" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ResourceDictionary Source="/resources/icons.xaml"></ResourceDictionary>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="304"/>

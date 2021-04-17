@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="fonts\RalewayMedium.ttf" />
     <Resource Include="fonts\RalewayRegular.ttf" />
     <Resource Include="fonts\RalewaySemiBold.ttf" />
