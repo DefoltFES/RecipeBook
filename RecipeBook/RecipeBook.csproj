@@ -6,4 +6,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="fonts\RalewayMedium.ttf" />
+    <None Remove="fonts\RalewayRegular.ttf" />
+    <None Remove="fonts\RalewaySemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fonts\RalewayMedium.ttf" />
+    <Resource Include="fonts\RalewayRegular.ttf" />
+    <Resource Include="fonts\RalewaySemiBold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="RecipeDatabase.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
