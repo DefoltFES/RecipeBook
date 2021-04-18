@@ -26,14 +26,14 @@
                         </StackPanel>
                     </Border>
                     <StackPanel Margin="0,40,0,0">
-                        <Button x:Name="AllRecipes"  Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <Button x:Name="AllRecipes"   Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                         <StackPanel   Orientation="Horizontal">
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Recipe}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30">
                             </Path>
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все рецепты"/>
                         </StackPanel>
                         </Button>
-                        <Button x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <Button Click="AllRecipes_OnClick" x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                             <StackPanel   Orientation="Horizontal">
                             <Path Width="30" Height="40"  Fill="{StaticResource MainColor}" Data="{StaticResource Book}" Margin="0,0,10,0" Stretch="Fill">
                             </Path>

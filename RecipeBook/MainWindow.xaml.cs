@@ -36,5 +36,10 @@ namespace RecipeBook
         {
             MainFrame.Content=new CategoriesPage();
         }
+
+        private void AllRecipes_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content=new BooksPage();
+        }
     }
 }

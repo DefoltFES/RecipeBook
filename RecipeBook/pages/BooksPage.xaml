@@ -1,0 +1,55 @@
+﻿<Page x:Class="RecipeBook.pages.BooksPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeBook.pages"
+      mc:Ignorable="d" 
+      Title="BooksPage">
+
+    <Grid>
+        <ScrollViewer>
+        <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
+            <StackPanel  HorizontalAlignment="Stretch" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource RegularTextFont }" Foreground="{StaticResource TextColor}">Все книги</TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"  BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Создать
+                        </TextBlock>
+                    </Border>
+                </Button>
+                <Button x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Назад
+                        </TextBlock>
+                    </Border>
+                </Button>
+            </StackPanel> 
+            <ListView Margin="0" Padding="0"    HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel    HorizontalAlignment="Center" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border HorizontalAlignment="Left" Width="344"  Margin="10" Padding="34,17,34,17" BorderBrush="{StaticResource MainColor}" BorderThickness="1" CornerRadius="15">
+                            <StackPanel >
+                                <TextBlock HorizontalAlignment="Left" Width="245" TextWrapping="Wrap" FontSize="24" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource RegularTextFont}" Text="20 рецептов пасхального пирога"></TextBlock>
+                                <Image HorizontalAlignment="Stretch" Source="https://via.placeholder.com/274x245" Margin="0,10,0,0" Width="274" Height="245"></Image>
+                                <TextBlock Margin="0,13,0,9" HorizontalAlignment="Left" FontSize="24" FontFamily="{StaticResource RegularTextFont}" Text="Описание"></TextBlock>
+                                <TextBlock Width="270"  TextWrapping="Wrap" FontSize="18" FontFamily="{StaticResource RegularTextFont}">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis suspendisse sed neque sed. Proin ut suspendisse faucibus convallis lacinia interdum libero sollicitudin id. Adipiscing urna augue libero tellus. Tincidunt amet neque, mattis et.
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
