@@ -21,11 +21,12 @@ namespace RecipeBook
     public partial class MainPage : Page
     {
         public MainPage()
+
         {
             InitializeComponent();
-            var list = new List<int>() { 1, 23, 45 };
+            var list = new List<int>() { 1, 23, 45,4 };
             LastBooks.ItemsSource = list;
-
+            PopularCategories.ItemsSource = list;
 
         }
 
