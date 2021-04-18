@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RecipeBook"
         mc:Ignorable="d"
         Title="Книги рецептов" 
-        MinHeight="900" MinWidth="1438" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Height="900" Width="1438" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="304"/>
@@ -52,7 +52,7 @@
 
             </Border>
         </Grid>
-        <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame"  Grid.Column="1" >
+        <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
 
         </Frame>
     </Grid>

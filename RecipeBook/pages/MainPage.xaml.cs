@@ -25,8 +25,9 @@ namespace RecipeBook
         {
             InitializeComponent();
             var list = new List<int>() { 1, 23, 45,4 };
+            var list1 = new List<int>() { 1, 23, 45, 4,5,6 };
             LastBooks.ItemsSource = list;
-            PopularCategories.ItemsSource = list;
+            PopularCategories.ItemsSource = list1;
 
         }
 
