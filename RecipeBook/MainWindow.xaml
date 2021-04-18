@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RecipeBook"
         mc:Ignorable="d"
         Title="Книги рецептов" 
-        Height="900" Width="1438" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+         WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="304"/>
@@ -25,28 +25,34 @@
                             </Path>
                         </StackPanel>
                     </Border>
-                    <StackPanel  Margin="0,40,0,0">
-                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <StackPanel Margin="0,40,0,0">
+                        <Button x:Name="AllRecipes"  Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <StackPanel   Orientation="Horizontal">
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Recipe}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30">
-
                             </Path>
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все рецепты"/>
                         </StackPanel>
-                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                        </Button>
+                        <Button x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                            <StackPanel   Orientation="Horizontal">
                             <Path Width="30" Height="40"  Fill="{StaticResource MainColor}" Data="{StaticResource Book}" Margin="0,0,10,0" Stretch="Fill">
                             </Path>
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все книги"/>
                         </StackPanel>
-                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                            </Button>
+                        <Button Click="Categories_OnClick" x:Name="Categories"  Margin="25,0,0,20" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal"  >
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Category}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30" />
-
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категории"/>
                         </StackPanel>
-                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
-                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Search}" Height="40" Width="30" Stretch="Fill" Margin="0,0,10,0"/>
+                        </Button>
 
+                        <Button x:Name="Search" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Search}" Height="40" Width="30" Stretch="Fill" Margin="0,0,10,0"/>
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Поиск"/>
                         </StackPanel>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
 

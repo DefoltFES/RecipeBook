@@ -12,29 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RecipeBook.pages;
 
-namespace RecipeBook
+namespace RecipeBook.pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CategoriesPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CategoriesPage : Page
     {
-        public MainWindow()
+        public CategoriesPage()
         {
             InitializeComponent();
-            
+            ListCategories.ItemsSource = new List<int>() {1, 4, 5, 5, 6, 6, 6, 6, 6, 6, 6,6, 6, 6};
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-                MainFrame.Content=new MainPage();
-        }
-
-        private void Categories_OnClick(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content=new CategoriesPage();
+            NavigationService.GoBack();
         }
     }
 }
