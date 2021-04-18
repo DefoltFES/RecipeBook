@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace RecipeBook
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPage : Page
     {
-        public MainWindow()
+        public MainPage()
         {
             InitializeComponent();
+            var list = new List<int>() { 1, 23, 45 };
+            LastBooks.ItemsSource = list;
+
+
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-                MainFrame.Content=new MainPage();
-        }
     }
 }

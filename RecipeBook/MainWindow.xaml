@@ -5,45 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeBook"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1438" WindowStartupLocation="CenterScreen">
+        Title="Книги рецептов" 
+        MinHeight="900" MinWidth="1438" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="304"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <Border BorderThickness="0,0,3,0">
-                <Border.BorderBrush>
-                    <SolidColorBrush Color="{StaticResource MainColor}"/>
-                </Border.BorderBrush>
+            <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,0,3,0">
+
                 <StackPanel Orientation="Vertical">
 
-                    <Border BorderThickness="0,0,0,3">
-                            <Border.BorderBrush>
-                            <SolidColorBrush Color="{StaticResource MainColor}"/>
-                            </Border.BorderBrush>
-                            <StackPanel  Margin="0,0,0,10"  HorizontalAlignment="Center"  Orientation="Horizontal">
-                                <TextBlock Margin="0,0,10,0" Text="Книги&#xA;рецептов" FontSize="35"  Foreground="#FF8450" FontFamily="{StaticResource BigTextFont}"/>
-                    <Path  Data="{StaticResource ResourceKey=Logo}">
-                        <Path.Fill>
-                            <SolidColorBrush Color="{StaticResource MainColor}"/>
-                        </Path.Fill>
-                    </Path>
-                    </StackPanel>
-                        </Border>
-                    <StackPanel Margin="25,40,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Path Data="{StaticResource Recipe}" Margin="0,0,10,0">
-                            <Path.Fill>
-                                <SolidColorBrush Color="{StaticResource MainColor}"/>
-                            </Path.Fill>
-                        </Path>
-                        <TextBlock Foreground="Orange"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все рецепты"/>
+                    <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,0,0,3">
+
+                        <StackPanel  Margin="0,0,0,10"  HorizontalAlignment="Center"  Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0" Text="Книги&#xA;рецептов" FontSize="35"  Foreground="{StaticResource MainColor}" FontFamily="{StaticResource BigTextFont}"/>
+                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource ResourceKey=Logo}">
+                            </Path>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel  Margin="0,40,0,0">
+                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Recipe}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30">
+
+                            </Path>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все рецепты"/>
+                        </StackPanel>
+                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Path Width="30" Height="40"  Fill="{StaticResource MainColor}" Data="{StaticResource Book}" Margin="0,0,10,0" Stretch="Fill">
+                            </Path>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все книги"/>
+                        </StackPanel>
+                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Category}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30" />
+
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категории"/>
+                        </StackPanel>
+                        <StackPanel Margin="25,0,0,20" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Search}" Height="40" Width="30" Stretch="Fill" Margin="0,0,10,0"/>
+
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Поиск"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                
+
             </Border>
-           
         </Grid>
+        <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame"  Grid.Column="1" >
+
+        </Frame>
     </Grid>
 
 </Window>

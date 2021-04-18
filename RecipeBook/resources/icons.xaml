@@ -11,9 +11,9 @@
     <FontFamily x:Key="BigTextFont">/fonts/#Raleway SemiBold </FontFamily>
     <FontFamily x:Key="MiddleTextFont">/fonts/#Raleway Medium</FontFamily>
     <FontFamily x:Key="RegularTextFont">/fonts/#Raleway Regular</FontFamily>
-    <Color x:Key="MainColor">#FF8450</Color>
-    <Color x:Key="TextColor">Black</Color>
-    <Color x:Key="RecipeTextColor">White</Color>
+    <SolidColorBrush x:Key="MainColor">#FF8450</SolidColorBrush>
+    <SolidColorBrush x:Key="TextColor">Black</SolidColorBrush>
+    <SolidColorBrush x:Key="RecipeTextColor">White</SolidColorBrush>
 
 
 </ResourceDictionary>
