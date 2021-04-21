@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace RecipeBook.pages
 {
     /// <summary>
-    /// Interaction logic for BooksPage.xaml
+    /// Interaction logic for RecipePage.xaml
     /// </summary>
-    public partial class BooksPage : Page
+    public partial class RecipePage : Page
     {
-        public BooksPage()
+        public RecipePage()
         {
             InitializeComponent();
-            Books.ItemsSource = new List<int>() {5,53,44,4,4,4,4,4,4,4,4,4 };
-        }
-
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-            
         }
     }
 }

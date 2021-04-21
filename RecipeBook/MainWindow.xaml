@@ -14,11 +14,8 @@
         </Grid.ColumnDefinitions>
         <Grid>
             <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,0,3,0">
-
                 <StackPanel Orientation="Vertical">
-
                     <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,0,0,3">
-
                         <StackPanel  Margin="0,0,0,10"  HorizontalAlignment="Center"  Orientation="Horizontal">
                             <TextBlock Margin="0,0,10,0" Text="Книги&#xA;рецептов" FontSize="35"  Foreground="{StaticResource MainColor}" FontFamily="{StaticResource BigTextFont}"/>
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource ResourceKey=Logo}">
@@ -54,6 +51,17 @@
                         </StackPanel>
                         </Button>
                     </StackPanel>
+                    <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,3,0,0">
+                        <StackPanel >
+                            <TextBlock Margin="25,0,0,20" FontSize="25" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource MiddleTextFont}"> Создать</TextBlock>
+                            <Button x:Name="CreateCategory" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                                <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                                    
+                                    <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
 
             </Border>

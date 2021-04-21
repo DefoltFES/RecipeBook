@@ -12,24 +12,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace RecipeBook.pages
 {
     /// <summary>
-    /// Interaction logic for BooksPage.xaml
+    /// Interaction logic for CreateCategory.xaml
     /// </summary>
-    public partial class BooksPage : Page
+    public partial class CreateCategory : Page
     {
-        public BooksPage()
+        public CreateCategory()
         {
             InitializeComponent();
-            Books.ItemsSource = new List<int>() {5,53,44,4,4,4,4,4,4,4,4,4 };
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
-            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                ImageCategory.Source = new BitmapImage(fileUri);
+            }
         }
     }
 }

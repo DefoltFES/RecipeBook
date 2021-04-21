@@ -34,12 +34,17 @@ namespace RecipeBook
 
         private void Categories_OnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content=new CategoriesPage();
+            MainFrame.Navigate(new CategoriesPage());
         }
 
         private void AllRecipes_OnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content=new BooksPage();
+            MainFrame.Navigate(new BooksPage());
+        }
+
+        private void CreateCategory_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CreateCategory());
         }
     }
 }
