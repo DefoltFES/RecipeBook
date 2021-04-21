@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
 
 namespace RecipeBook
 {
@@ -24,10 +25,10 @@ namespace RecipeBook
 
         {
             InitializeComponent();
+            var dbContext=new RecipeDatabaseContext();
             var list = new List<int>() { 1, 23, 45,4 };
-            var list1 = new List<int>() { 1, 23, 45, 4,5,6 };
-            LastBooks.ItemsSource = list;
-            PopularCategories.ItemsSource = list1;
+            var listCategories = dbContext.Categories.Take(5).ToList();
+           
 
         }
 

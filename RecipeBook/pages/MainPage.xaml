@@ -48,8 +48,8 @@
                             <DataTemplate>
                             <Border Margin="20" Padding="30,15,30,0" BorderBrush="{StaticResource MainColor}" HorizontalAlignment="Left" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
                             <StackPanel>
-                                <Image  Source="https://via.placeholder.com/140x140"></Image>
-                                <TextBlock Foreground="{StaticResource MainColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0">Говядина</TextBlock>
+                                <Image x:Name="CategoriesImage" Source="https://via.placeholder.com/140x140"></Image>
+                                <TextBlock x:Name="TextCategory" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0">Говядина</TextBlock>
                             </StackPanel>
                             </Border>
                             </DataTemplate>

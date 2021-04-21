@@ -11,23 +11,14 @@
     <Grid>
         <ScrollViewer>
         <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
-            <StackPanel  HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <DockPanel  HorizontalAlignment="Stretch" >
                 <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource RegularTextFont }" Foreground="{StaticResource TextColor}">Категории</TextBlock>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"  BorderBrush="Transparent">
+                <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
-                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Создать
-                        </TextBlock>
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Назад</TextBlock>
                     </Border>
                 </Button>
-                <Button x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
-                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
-                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Назад
-                        </TextBlock>
-                    </Border>
-                </Button>
-            </StackPanel>
+            </DockPanel>
                 <ListView Margin="0,22,0,0" x:Name="ListCategories" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>

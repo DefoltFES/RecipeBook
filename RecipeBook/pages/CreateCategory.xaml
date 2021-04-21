@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RecipeBook.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      
       Title="CreateCategory">
 
     <Grid>
@@ -23,11 +23,17 @@
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Обзор
                         </TextBlock>
                     </Border>
-                    </Button>
+                </Button>
                 <TextBlock Margin="0,40,0,0" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24">Название</TextBlock>
                 <Border CornerRadius="5" HorizontalAlignment="Left" Width="236" BorderBrush="{StaticResource MainColor}" BorderThickness="1">
-                <TextBox FontSize="24" Foreground="{StaticResource TextColor}"  FontFamily="{StaticResource RegularTextFont}" BorderBrush="Transparent"></TextBox>
+                <TextBox x:Name="Name" FontSize="24" Foreground="{StaticResource TextColor}"  FontFamily="{StaticResource RegularTextFont}" BorderBrush="Transparent"></TextBox>
                 </Border>
+                <Button  Margin="0,20" x:Name="SaveButton"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent" Click="SaveButton_Click">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Сохранить изменения
+                        </TextBlock>
+                    </Border>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

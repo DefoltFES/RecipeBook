@@ -52,21 +52,27 @@
                         </Button>
                     </StackPanel>
                     <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,3,0,0">
-                        <StackPanel >
-                            <TextBlock Margin="25,0,0,20" FontSize="25" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource MiddleTextFont}"> Создать</TextBlock>
-                            <Button x:Name="CreateCategory" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
-                                <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                                    
-                                    <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
+                        <ScrollViewer>
+                                <StackPanel>
+                                    <TextBlock Margin="25,0,0,20" FontSize="25" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource MiddleTextFont}"> Создать</TextBlock>
+                                    <Button x:Name="CreateCategory" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
+                                    </StackPanel>
+                                    </Button>
+                                <Button x:Name="Cre" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </ScrollViewer>
                     </Border>
                 </StackPanel>
 
             </Border>
         </Grid>
-        <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
+        <Frame NavigationUIVisibility="Visible" x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
 
         </Frame>
     </Grid>
