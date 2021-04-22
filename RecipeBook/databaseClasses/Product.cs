@@ -16,6 +16,6 @@ namespace RecipeBook.databaseClasses
         public long IdProduct { get; set; }
         public string Name { get; set; }
 
-        public  ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
     }
 }

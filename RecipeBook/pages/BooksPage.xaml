@@ -20,7 +20,7 @@
                 </Button>
             </DockPanel>
 
-            <ListView Margin="0" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
+            <ListView  Margin="0" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>

@@ -49,13 +49,12 @@ namespace RecipeBook.pages
         {
             var dbContext=new RecipeDatabaseContext();
             var x = BitmapSourceToByteArray((BitmapSource) ImageCategory.Source);
-            dbContext.Categories.Add(new Category()
-            {
-                Name = Name.Text,
-                Image = x
-            });
+            dbContext.Categories.Add(new Category(Name.Text, x));
             dbContext.SaveChanges();
             MessageBox.Show("Категория создана");
+            this.NavigationService.Refresh();
+            NavigationService.GoBack();
+            
         }
 
         private byte[] BitmapSourceToByteArray(BitmapSource image)

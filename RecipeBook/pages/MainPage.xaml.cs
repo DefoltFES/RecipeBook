@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,25 +13,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
 using RecipeBook.databaseClasses;
+using RecipeBook.pages;
 
 namespace RecipeBook
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
+   
     public partial class MainPage : Page
     {
         public MainPage()
-
         {
             InitializeComponent();
-            var dbContext=new RecipeDatabaseContext();
+            
             var list = new List<int>() { 1, 23, 45,4 };
-            var listCategories = dbContext.Categories.Take(5).ToList();
+            var dbContext = new RecipeDatabaseContext();
+            var suka = dbContext.Categories.ToList();
            
-
         }
 
+       
     }
 }

@@ -21,9 +21,9 @@ namespace RecipeBook.databaseClasses
         public string Description { get; set; }
         public byte[] Image { get; set; }
 
-        public  ObservableCollection<BookRecipe> BookRecipes { get; set; }
-        public  ObservableCollection<Instruction> Instructions { get; set; }
-        public  ObservableCollection<ListCategory> ListCategories { get; set; }
-        public  ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public virtual ObservableCollection<BookRecipe> BookRecipes { get; set; }
+        public virtual ObservableCollection<Instruction> Instructions { get; set; }
+        public virtual ObservableCollection<ListCategory> ListCategories { get; set; }
+        public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
     }
 }
