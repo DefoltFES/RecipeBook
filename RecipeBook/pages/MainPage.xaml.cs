@@ -30,11 +30,31 @@ namespace RecipeBook
             InitializeComponent();
             
             var list = new List<int>() { 1, 23, 45,4 };
-            var dbContext = new RecipeDatabaseContext();
-            var suka = dbContext.Categories.ToList();
-           
+            
+            var suka = App.dbContext.Categories.ToList();
+            PopularCategories.ItemsSource = suka;
         }
 
-       
+
+        private void DeleteMenuItem(object sender, RoutedEventArgs e)
+        {
+            if (PopularCategories.SelectedItem is Category category)
+            {
+                App.dbContext.Categories.Remove(category);
+            }
+
+            App.dbContext.SaveChanges();
+            NavigationService.Refresh();
+        }
+
+        private void EditingMenuButton(object sender, RoutedEventArgs e)
+        {
+            if (PopularCategories.SelectedItem is Category category)
+            {
+                NavigationService.Navigate(new CreateCategory(category,true));
+
+            }
+           
+        }
     }
 }

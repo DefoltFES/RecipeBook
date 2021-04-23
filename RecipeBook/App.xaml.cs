@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using RecipeBook.databaseClasses;
 
 namespace RecipeBook
 {
@@ -13,5 +14,6 @@ namespace RecipeBook
     /// </summary>
     public partial class App : Application
     {
+        public static RecipeDatabaseContext dbContext=new RecipeDatabaseContext();
     }
 }

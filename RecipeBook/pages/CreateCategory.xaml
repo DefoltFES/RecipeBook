@@ -10,18 +10,15 @@
 
     <Grid>
         <StackPanel Margin="37,21,37,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <TextBlock FontSize="36" FontFamily="{StaticResource MiddleTextFont}" Foreground="{StaticResource TextColor}">
-                Создание категории
-            </TextBlock>
+            <TextBlock x:Name="TextMode" FontSize="36" FontFamily="{StaticResource MiddleTextFont}" Foreground="{StaticResource TextColor}" ></TextBlock>
             <StackPanel Margin="0,12,0,0">
                 <TextBlock FontSize="24" FontFamily="{StaticResource RegularTextFont}" Foreground="{StaticResource TextColor}">
                     Изображение
                 </TextBlock>
-                <Image x:Name="ImageCategory" Margin="0,24,0,0" HorizontalAlignment="Left"  Stretch="UniformToFill" Width="140" Height="140" Source="https://via.placeholder.com/140x140"></Image>
+                <Image x:Name="ImageCategory" Margin="0,24,0,0" HorizontalAlignment="Left"  Stretch="UniformToFill" Width="140" Height="140" Source="{StaticResource SmallImage}" ></Image>
                 <Button x:Name="ImageButtonAdd" Click="ImageButtonAdd_OnClick" Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
-                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Обзор
-                        </TextBlock>
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Обзор</TextBlock>
                     </Border>
                 </Button>
                 <TextBlock Margin="0,40,0,0" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24">Название</TextBlock>
@@ -30,8 +27,7 @@
                 </Border>
                 <Button  Margin="0,20" x:Name="SaveButton"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent" Click="SaveButton_Click">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
-                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Сохранить изменения
-                        </TextBlock>
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Сохранить изменения</TextBlock>
                     </Border>
                 </Button>
             </StackPanel>

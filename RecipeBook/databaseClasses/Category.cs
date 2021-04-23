@@ -9,7 +9,7 @@ using RecipeBook.Annotations;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class Category:INotifyPropertyChanged
+    public partial class Category:INotifyPropertyChanged,ICloneable
     {
        
         private string name;
@@ -53,6 +53,11 @@ namespace RecipeBook.databaseClasses
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

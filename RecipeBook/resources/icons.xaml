@@ -14,7 +14,8 @@
     <SolidColorBrush x:Key="MainColor">#FF8450</SolidColorBrush>
     <SolidColorBrush x:Key="TextColor">Black</SolidColorBrush>
     <SolidColorBrush x:Key="RecipeTextColor">White</SolidColorBrush>
-
+    <BitmapImage x:Key="SmallImage" UriSource="\images\140.png"></BitmapImage>
+    <BitmapImage x:Key="BigImage" UriSource="\images\274.png"></BitmapImage>
 
 </ResourceDictionary>
 

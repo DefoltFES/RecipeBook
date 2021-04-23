@@ -44,6 +44,12 @@
                             <WrapPanel   HorizontalAlignment="Center" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Click="EditingMenuButton"  Header="Редактировать"></MenuItem>
+                            <MenuItem Click="DeleteMenuItem"  Header="Удалить"></MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                             <Border Margin="20" Padding="10,10,10,10"  BorderBrush="{StaticResource MainColor}"  HorizontalAlignment="Center" Width="200" Height="200" BorderThickness="1" CornerRadius="28">

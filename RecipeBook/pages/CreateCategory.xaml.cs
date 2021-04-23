@@ -23,9 +23,22 @@ namespace RecipeBook.pages
     /// </summary>
     public partial class CreateCategory : Page
     {
-        public CreateCategory()
+        public CreateCategory(Category category=null,bool isEdit=false)
         {
+            var oldCategory = category.Clone();
+            DataContext = oldCategory;
             InitializeComponent();
+            if (isEdit == false)
+            {
+                TextMode.Text = "Создание категории";
+            }
+            else
+            {
+                TextMode.Text = "Редактирование";
+               
+            }
+
+           
         }
 
         private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
@@ -52,7 +65,6 @@ namespace RecipeBook.pages
             dbContext.Categories.Add(new Category(Name.Text, x));
             dbContext.SaveChanges();
             MessageBox.Show("Категория создана");
-            this.NavigationService.Refresh();
             NavigationService.GoBack();
             
         }
