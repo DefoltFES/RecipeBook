@@ -17,7 +17,7 @@ using RecipeBook.service;
 
 namespace RecipeBook.viewModels
 {
-    class MainPageViewModel:INotifyPropertyChanged
+    class MainPageViewModel:ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ObservableCollection<Category> popularCategoriesList;
@@ -29,7 +29,7 @@ namespace RecipeBook.viewModels
             set
             {
                 popularCategoriesList = value;
-                OnPropertyChanged("PopularCategoriesList");
+                OnPropertyChanged();
             }
         }
 
