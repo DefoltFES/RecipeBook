@@ -17,57 +17,41 @@
                 <StackPanel Orientation="Vertical">
                     <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,0,0,3">
                         <StackPanel  Margin="0,0,0,10"  HorizontalAlignment="Center"  Orientation="Horizontal">
-                            <TextBlock Margin="0,0,10,0" Text="Книги&#xA;рецептов" FontSize="35"  Foreground="{StaticResource MainColor}" FontFamily="{StaticResource BigTextFont}"/>
+                            <TextBlock Margin="0,0,10,0" Text="Книги&#xA;рецептов" FontSize="35"  Foreground="{StaticResource MainColor}" FontFamily="{StaticResource SemiBold}"/>
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource ResourceKey=Logo}">
                             </Path>
                         </StackPanel>
                     </Border>
                     <StackPanel Margin="0,40,0,0">
-                        <Button x:Name="AllRecipes"   Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <Button x:Name="AllRecipes" Click="AllRecipes_OnClick"  Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                         <StackPanel   Orientation="Horizontal">
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Recipe}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30">
                             </Path>
-                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все рецепты"/>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Все рецепты"/>
                         </StackPanel>
                         </Button>
                         <Button Click="AllRecipes_OnClick" x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                             <StackPanel   Orientation="Horizontal">
                             <Path Width="30" Height="40"  Fill="{StaticResource MainColor}" Data="{StaticResource Book}" Margin="0,0,10,0" Stretch="Fill">
                             </Path>
-                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Все книги"/>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Все книги"/>
                         </StackPanel>
                             </Button>
                         <Button Click="Categories_OnClick" x:Name="Categories"  Margin="25,0,0,20" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent">
                             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal"  >
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Category}" Margin="0,0,10,0" Height="40" Stretch="Fill" Width="30" />
-                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категории"/>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Категории"/>
                         </StackPanel>
                         </Button>
 
                         <Button x:Name="Search" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                         <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
                             <Path Fill="{StaticResource MainColor}" Data="{StaticResource Search}" Height="40" Width="30" Stretch="Fill" Margin="0,0,10,0"/>
-                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Поиск"/>
+                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Поиск"/>
                         </StackPanel>
                         </Button>
                     </StackPanel>
-                    <Border BorderBrush="{StaticResource MainColor}" BorderThickness="0,3,0,0">
-                        <ScrollViewer>
-                                <StackPanel>
-                                    <TextBlock Margin="25,0,0,20" FontSize="25" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource MiddleTextFont}"> Создать</TextBlock>
-                                    <Button x:Name="CreateCategory" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
-                                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                                        <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
-                                    </StackPanel>
-                                    </Button>
-                                <Button x:Name="Cre" Click="CreateCategory_OnClick" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
-                                    <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                                        <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource MiddleTextFont}" Text="Категорию"/>
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Border>
+                 
                 </StackPanel>
 
             </Border>

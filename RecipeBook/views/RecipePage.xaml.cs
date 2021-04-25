@@ -23,6 +23,7 @@ namespace RecipeBook.pages
         public RecipePage()
         {
             InitializeComponent();
+            this.ListCategories.ItemsSource = new List<int>() {14, 4, 4, 4, 5, 5, 6, 7, 7};
         }
     }
 }
