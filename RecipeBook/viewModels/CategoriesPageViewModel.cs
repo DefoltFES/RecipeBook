@@ -6,19 +6,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using Microsoft.EntityFrameworkCore;
 using RecipeBook.databaseClasses;
 using RecipeBook.service;
 
 namespace RecipeBook.viewModels
 {
   public  class CategoriesPageViewModel:ViewModel
-    {
-        public ObservableCollection<Category> Categories { get; set; }
-        RelayCommand deleteCommand;
+  {
+      public Category SelectedCategory { get; set; }
+      private ObservableCollection<Category> categories;
+      public ObservableCollection<Category> Categories
+      {
+          get { return categories; }
+          set
+          {
+              categories = value;
+              OnPropertyChanged();
+          }
+      }
+
+
+      RelayCommand deleteCommand;
         RelayCommand addCommand;
+        RelayCommand editCommand;
+
         public CategoriesPageViewModel()
         {
-            Categories=new ObservableCollection<Category>(App.dbContext.Categories.ToList());
+            App.dbContext.Categories.Load();
+            Categories=App.dbContext.Categories.Local.ToObservableCollection();
         }
 
         public RelayCommand DeleteCommand
@@ -57,6 +73,37 @@ namespace RecipeBook.viewModels
             }
         }
 
+        public RelayCommand EditCommand => editCommand ??
+                       (editCommand = new RelayCommand((selectedItem) =>
+                       {
+                           if (selectedItem == null) return;
+                           int newIndex = Categories.IndexOf((Category) selectedItem);
+                           Category category = selectedItem as Category;
+                           Category vm = (Category)category.Clone();
+                           CreateOrEditCategory phoneWindow = new CreateOrEditCategory(vm);
+                           if (phoneWindow.ShowDialog() == true)
+                           {
+                               Categories.Remove((Category) selectedItem);
 
+                               category = App.dbContext.Categories.Find(phoneWindow.Category.IdCategory);
+                               
+                               if (category != null)
+                               {
+                                 
+                                   category.Name = phoneWindow.Category.Name;
+                                   category.Image = phoneWindow.Category.Image;
+                                   category.IdCategory = phoneWindow.Category.IdCategory;
+                                   category.ListCategories = phoneWindow.Category.ListCategories;
+                                   Categories.Remove((Category)selectedItem);
+                                   Categories.Add(category);
+                                   int oldIndex = Categories.IndexOf(category);
+                                   Categories.Move(oldIndex,newIndex);
+                                   App.dbContext.Entry(category).State = EntityState.Modified;
+                                   App.dbContext.SaveChanges();
+                                   
+
+                               }
+                           }
+                       }));
     }
 }

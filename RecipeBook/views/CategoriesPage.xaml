@@ -1,0 +1,53 @@
+﻿<Page x:Class="RecipeBook.pages.CategoriesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeBook.pages"
+      mc:Ignorable="d" 
+      ShowsNavigationUI="False"
+      Title="CategoriesPage">
+
+    <Grid>
+        <ScrollViewer>
+        <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
+            <DockPanel  HorizontalAlignment="Stretch" >
+                <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource RegularTextFont }" Foreground="{StaticResource TextColor}">Категории</TextBlock>
+                <Button DockPanel.Dock="Right" Command="{Binding AddCommand}"   Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Создать</TextBlock>
+                    </Border>
+                </Button>
+                    <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Назад</TextBlock>
+                    </Border>
+                </Button>
+            </DockPanel>
+                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu >
+                            <MenuItem Command="{Binding EditCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  Header="Редактировать"></MenuItem>
+                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel   HorizontalAlignment="Left" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="20" Padding="10,10,10,10"  BorderBrush="{StaticResource MainColor}"  HorizontalAlignment="Center" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
+                                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                                    <Image HorizontalAlignment="Center" Width="140" Height="140" Stretch="UniformToFill" x:Name="CategoriesImage" Source="{Binding Image}"></Image>
+                                    <TextBlock HorizontalAlignment="Center" Width="140" TextWrapping="Wrap" x:Name="TextCategory" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
