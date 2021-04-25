@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
 using RecipeBook.pages;
+using RecipeBook.viewModels;
 
 namespace RecipeBook
 {
@@ -45,7 +47,15 @@ namespace RecipeBook
 
         private void CreateCategory_OnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new CreateCategory());
+            CreateOrEditCategory categoryWindow = new CreateOrEditCategory(new Category());
+            if (categoryWindow.ShowDialog() == true)
+            {
+                Category category = categoryWindow.Category;
+                
+                App.dbContext.Categories.Add(category);
+                App.dbContext.SaveChanges();
+                
+            }
         }
     }
 }

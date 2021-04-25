@@ -11,42 +11,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using RecipeBook.databaseClasses;
 
-namespace RecipeBook.pages
+namespace RecipeBook
 {
     /// <summary>
-    /// Interaction logic for CreateCategory.xaml
+    /// Interaction logic for CreateOrEditCategory.xaml
     /// </summary>
-    public partial class CreateCategory : Page
+    public partial class CreateOrEditCategory : Window
     {
         public Category Category { get; private set; }
-        public bool isClicked { get;private  set;}
-        public CreateCategory(Category category=null,bool isEdit=false)
+        public CreateOrEditCategory(Category category,bool isEdit=false)
         {
-           
             InitializeComponent();
-            if (isEdit == false)
+            Category = category;
+            this.DataContext = Category;
+            if (!isEdit)
             {
                 TextMode.Text = "Создание категории";
             }
             else
             {
-                TextMode.Text = "Редактирование";
-                category.Image= BitmapSourceToByteArray((BitmapSource)App.Current.Resources.FindName("SmallImage"));
-
+                TextMode.Text = "Редакатирование";
             }
-            Category = category;
-           
-            this.DataContext = Category;
-            
-
-           
         }
-
         private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
@@ -55,27 +45,25 @@ namespace RecipeBook.pages
                 CheckPathExists = true,
                 Multiselect = false
             };
-      
+
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
-                ImageCategory.Source = new BitmapImage(fileUri);
+                ImageCategory.Source =  new BitmapImage(fileUri);;
             }
 
         }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            isClicked = true;
-            NavigationService.GoBack();
-            
+            Category.Image = BitmapSourceToByteArray((BitmapSource)ImageCategory.Source);
+            this.DialogResult = true;
         }
 
         private byte[] BitmapSourceToByteArray(BitmapSource image)
         {
             using (var stream = new MemoryStream())
             {
-                var encoder = new PngBitmapEncoder(); 
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(image));
                 encoder.Save(stream);
                 return stream.ToArray();

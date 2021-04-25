@@ -9,7 +9,7 @@ using RecipeBook.Annotations;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class Category:INotifyPropertyChanged,ICloneable
+    public partial class Category:ICloneable
     {
        
         private string name;
@@ -32,7 +32,6 @@ namespace RecipeBook.databaseClasses
             set
             {
                 name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
             }
         }
 
@@ -42,19 +41,12 @@ namespace RecipeBook.databaseClasses
             set
             {
                 image = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
             }
         }
 
-        public  ObservableCollection<ListCategory> ListCategories { get; set; }
+        public virtual  ObservableCollection<ListCategory> ListCategories { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
+       
         public object Clone()
         {
             return this.MemberwiseClone();
