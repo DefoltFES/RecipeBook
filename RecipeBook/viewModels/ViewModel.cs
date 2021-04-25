@@ -9,7 +9,7 @@ using RecipeBook.Annotations;
 
 namespace RecipeBook.viewModels
 {
-    class ViewModel:INotifyPropertyChanged
+  public class ViewModel:INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

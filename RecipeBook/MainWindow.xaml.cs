@@ -37,7 +37,7 @@ namespace RecipeBook
 
         private void Categories_OnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new CategoriesPage());
+            MainFrame.Navigate(new CategoriesPage(new CategoriesPageViewModel()));
         }
 
         private void AllRecipes_OnClick(object sender, RoutedEventArgs e)
@@ -47,15 +47,7 @@ namespace RecipeBook
 
         private void CreateCategory_OnClick(object sender, RoutedEventArgs e)
         {
-            CreateOrEditCategory categoryWindow = new CreateOrEditCategory(new Category());
-            if (categoryWindow.ShowDialog() == true)
-            {
-                Category category = categoryWindow.Category;
-                
-                App.dbContext.Categories.Add(category);
-                App.dbContext.SaveChanges();
-                
-            }
+         
         }
     }
 }

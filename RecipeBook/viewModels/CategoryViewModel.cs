@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using RecipeBook.databaseClasses;
 
 namespace RecipeBook.viewModels
 {
-    class CategoryViewModel:ViewModel
+    public class CategoryViewModel:ViewModel
     {
         private Category category;
 
@@ -23,6 +24,26 @@ namespace RecipeBook.viewModels
             set
             {
                 category.Name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public byte[] Image
+        {
+            get { return category.Image; }
+            set
+            {
+                category.Image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<ListCategory> ListCategories
+        {
+            get { return category.ListCategories; }
+            set
+            {
+                category.ListCategories = value;
                 OnPropertyChanged();
             }
         }

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using RecipeBook.databaseClasses;
+using RecipeBook.viewModels;
 
 namespace RecipeBook
 {
@@ -22,8 +23,8 @@ namespace RecipeBook
     /// </summary>
     public partial class CreateOrEditCategory : Window
     {
-        public Category Category { get; private set; }
-        public CreateOrEditCategory(Category category,bool isEdit=false)
+        public CategoryViewModel Category { get; private set; }
+        public CreateOrEditCategory(CategoryViewModel category,bool isEdit=false)
         {
             InitializeComponent();
             Category = category;

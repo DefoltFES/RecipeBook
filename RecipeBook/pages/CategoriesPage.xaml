@@ -13,24 +13,36 @@
         <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
             <DockPanel  HorizontalAlignment="Stretch" >
                 <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource RegularTextFont }" Foreground="{StaticResource TextColor}">Категории</TextBlock>
-                <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                <Button DockPanel.Dock="Right" x:Name="CreateButton" Click="CreateButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Создать</TextBlock>
+                    </Border>
+                </Button>
+                    <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource BigTextFont}">Назад</TextBlock>
                     </Border>
                 </Button>
-            </DockPanel>
-                <ListView Margin="0,22,0,0" x:Name="ListCategories" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
-                <ListView.ItemsPanel>
+               
+                </DockPanel>
+                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Categories}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                        <MenuItem  Header="Редактировать"></MenuItem>
+                        <MenuItem x:Name="DeleteItemButton" Click="DeleteItemButton_OnClick"  Header="Удалить"></MenuItem>
+                       </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel   HorizontalAlignment="Left" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="20" Padding="30,15,30,0" BorderBrush="{StaticResource MainColor}" HorizontalAlignment="Left" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
-                                <StackPanel Background="Transparent">
-                                    <Image Source="https://via.placeholder.com/140x140"></Image>
-                                    <TextBlock Foreground="{StaticResource MainColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0">Говядина</TextBlock>
+                            <Border Margin="20" Padding="10,10,10,10"  BorderBrush="{StaticResource MainColor}"  HorizontalAlignment="Center" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
+                                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                                    <Image HorizontalAlignment="Center" Width="140" Height="140" Stretch="UniformToFill" x:Name="CategoriesImage" Source="{Binding Image}"></Image>
+                                    <TextBlock HorizontalAlignment="Center" Width="140" TextWrapping="Wrap" x:Name="TextCategory" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource RegularTextFont}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0" Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
