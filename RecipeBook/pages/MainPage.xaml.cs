@@ -30,9 +30,7 @@ namespace RecipeBook
         {
             InitializeComponent();
             
-            var list = new List<int>() { 1, 23, 45,4 };
-
-            DataContext = new MainPageViewModel();
+          
            
 
         }
@@ -44,6 +42,11 @@ namespace RecipeBook
         private void DeleteCategoryExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             
+        }
+
+        private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MainPageViewModel();
         }
     }
 }

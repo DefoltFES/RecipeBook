@@ -23,20 +23,13 @@ namespace RecipeBook
     /// </summary>
     public partial class CreateOrEditCategory : Window
     {
-        public CategoryViewModel Category { get; private set; }
-        public CreateOrEditCategory(CategoryViewModel category,bool isEdit=false)
+        public Category Category { get; private set; }
+        public CreateOrEditCategory(Category category)
         {
             InitializeComponent();
             Category = category;
             this.DataContext = Category;
-            if (!isEdit)
-            {
-                TextMode.Text = "Создание категории";
-            }
-            else
-            {
-                TextMode.Text = "Редакатирование";
-            }
+         
         }
         private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {

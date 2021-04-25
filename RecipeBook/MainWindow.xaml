@@ -72,7 +72,7 @@
 
             </Border>
         </Grid>
-        <Frame NavigationUIVisibility="Visible" x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
+        <Frame  x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
 
         </Frame>
     </Grid>

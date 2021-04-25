@@ -9,11 +9,11 @@ using RecipeBook.databaseClasses;
 
 namespace RecipeBook.viewModels
 {
-    public class CategoryViewModel:ViewModel
+    public class CreateOrEditCategoryViewModel:ViewModel
     {
         private Category category;
 
-        public CategoryViewModel(Category c)
+        public CreateOrEditCategoryViewModel(Category c)
         {
             category = c;
         }
@@ -38,14 +38,7 @@ namespace RecipeBook.viewModels
             }
         }
 
-        public ObservableCollection<ListCategory> ListCategories
-        {
-            get { return category.ListCategories; }
-            set
-            {
-                category.ListCategories = value;
-                OnPropertyChanged();
-            }
-        }
+     
+        
     }
 }

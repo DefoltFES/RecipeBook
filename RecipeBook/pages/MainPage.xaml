@@ -7,7 +7,7 @@
       xmlns:service="clr-namespace:RecipeBook.service"
       mc:Ignorable="d" 
       Title="MainPage"
-      ShowsNavigationUI="False" >
+      ShowsNavigationUI="False" Loaded="MainPage_OnLoaded">
 
    
     <Grid>

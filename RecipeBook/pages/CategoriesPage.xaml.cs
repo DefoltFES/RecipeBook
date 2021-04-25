@@ -22,45 +22,23 @@ namespace RecipeBook.pages
     /// </summary>
     public partial class CategoriesPage : Page
     {
-        public CategoriesPageViewModel categoriesPage { get; private set; }
-        public CategoriesPage(CategoriesPageViewModel categories)
+        
+        public CategoriesPage()
         {
-            categoriesPage = categories;
-            DataContext = categoriesPage;
-            InitializeComponent();
             
+            DataContext = new CategoriesPageViewModel();
+            InitializeComponent();
             
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
-        }
-
-        private void CreateButton_OnClick(object sender, RoutedEventArgs e)
-        {
             
-            CreateOrEditCategory categoryWindow = new CreateOrEditCategory(new CategoryViewModel(new Category()));
-            if (categoryWindow.ShowDialog() == true)
-            {
-                CategoryViewModel category = categoryWindow.Category;
-                categoriesPage.Categories.Add(new Category(category.Name, category.Image));
-                App.dbContext.Categories.Add(new Category(category.Name,category.Image));
-                App.dbContext.SaveChanges();
-
-            }
         }
 
-        private void DeleteItemButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var item = ListCategories.SelectedItem as Category;
-            var message = MessageBox.Show("Вы хотите удалить категорию ?", "Предупреждение", MessageBoxButton.OKCancel);
-            if (item == null || message == MessageBoxResult.Cancel) { return; }
+        
 
-            App.dbContext.Categories.Local.Remove(item);
-            categoriesPage.Categories.Remove(item);
-            App.dbContext.SaveChanges();
-
-        }
+       
     }
 }

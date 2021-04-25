@@ -37,7 +37,7 @@ namespace RecipeBook
 
         private void Categories_OnClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new CategoriesPage(new CategoriesPageViewModel()));
+            MainFrame.Navigate(new CategoriesPage());
         }
 
         private void AllRecipes_OnClick(object sender, RoutedEventArgs e)
