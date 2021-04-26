@@ -23,13 +23,13 @@ namespace RecipeBook
     /// </summary>
     public partial class CreateOrEditCategory : Window
     {
-        public Category Category { get; private set; }
-        public CreateOrEditCategory(Category category)
+        public Category Categories { get; private set; }
+        public CreateOrEditCategory(Category categories)
         {
             InitializeComponent();
-            Category = category;
-            this.DataContext = Category;
-         
+            Categories = categories;
+            this.DataContext = Categories;
+
         }
         private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
@@ -43,13 +43,13 @@ namespace RecipeBook
             if (openFileDialog.ShowDialog() == true)
             {
                 Uri fileUri = new Uri(openFileDialog.FileName);
-                ImageCategory.Source =  new BitmapImage(fileUri);;
+                ImageCategory.Source = new BitmapImage(fileUri); ;
             }
 
         }
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Category.Image = BitmapSourceToByteArray((BitmapSource)ImageCategory.Source);
+            Categories.Image = BitmapSourceToByteArray((BitmapSource)ImageCategory.Source);
             this.DialogResult = true;
         }
 

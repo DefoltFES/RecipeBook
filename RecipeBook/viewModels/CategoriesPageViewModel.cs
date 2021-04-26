@@ -14,27 +14,27 @@ namespace RecipeBook.viewModels
 {
   public  class CategoriesPageViewModel:ViewModel
   {
-      public Category SelectedCategory { get; set; }
-      private ObservableCollection<Category> categories;
-      public ObservableCollection<Category> Categories
-      {
-          get { return categories; }
-          set
-          {
-              categories = value;
-              OnPropertyChanged();
-          }
-      }
+
+        private ObservableCollection<Category> categories;
+        public ObservableCollection<Category> Categories
+        {
+            get { return categories; }
+            set
+            {
+                categories = value;
+                OnPropertyChanged();
+            }
+        }
 
 
-      RelayCommand deleteCommand;
+        RelayCommand deleteCommand;
         RelayCommand addCommand;
         RelayCommand editCommand;
 
         public CategoriesPageViewModel()
         {
             App.dbContext.Categories.Load();
-            Categories=App.dbContext.Categories.Local.ToObservableCollection();
+            Categories = App.dbContext.Categories.Local.ToObservableCollection();
         }
 
         public RelayCommand DeleteCommand
@@ -46,9 +46,9 @@ namespace RecipeBook.viewModels
                        {
                            var message = MessageBox.Show("Вы хотите удалить категорию ?", "Предупреждение", MessageBoxButton.OKCancel);
                            if (selectedItem == null || message == MessageBoxResult.Cancel) { return; }
-                           Category category = selectedItem as Category;
-                           Categories.Remove(category);
-                           App.dbContext.Categories.Remove(category);
+                           Category categories = selectedItem as Category;
+                           Categories.Remove(categories);
+                           App.dbContext.Categories.Remove(categories);
                            App.dbContext.SaveChanges();
                        }));
             }
@@ -62,11 +62,11 @@ namespace RecipeBook.viewModels
                        (addCommand = new RelayCommand((o) =>
                        {
                            CreateOrEditCategory addCategoryWindow = new CreateOrEditCategory(new Category());
-                           if (addCategoryWindow.ShowDialog() == true )
+                           if (addCategoryWindow.ShowDialog() == true)
                            {
-                               Category category = addCategoryWindow.Category;
-                               Categories.Add(category);
-                               App.dbContext.Categories.Add(category);
+                               Category categories = addCategoryWindow.Categories;
+                               Categories.Add(categories);
+                               App.dbContext.Categories.Add(categories);
                                App.dbContext.SaveChanges();
                            }
                        }));
@@ -77,30 +77,30 @@ namespace RecipeBook.viewModels
                        (editCommand = new RelayCommand((selectedItem) =>
                        {
                            if (selectedItem == null) return;
-                           int newIndex = Categories.IndexOf((Category) selectedItem);
+                           int newIndex = Categories.IndexOf((Category)selectedItem);
                            Category category = selectedItem as Category;
                            Category vm = (Category)category.Clone();
-                           CreateOrEditCategory phoneWindow = new CreateOrEditCategory(vm);
-                           if (phoneWindow.ShowDialog() == true)
+                           CreateOrEditCategory editCategory = new CreateOrEditCategory(vm);
+                           if (editCategory.ShowDialog() == true)
                            {
-                               Categories.Remove((Category) selectedItem);
+                               Categories.Remove((Category)selectedItem);
 
-                               category = App.dbContext.Categories.Find(phoneWindow.Category.IdCategory);
-                               
+                               category = App.dbContext.Categories.Find(editCategory.Categories.IdCategory);
+
                                if (category != null)
                                {
-                                 
-                                   category.Name = phoneWindow.Category.Name;
-                                   category.Image = phoneWindow.Category.Image;
-                                   category.IdCategory = phoneWindow.Category.IdCategory;
-                                   category.ListCategories = phoneWindow.Category.ListCategories;
+
+                                   category.Name = editCategory.Categories.Name;
+                                   category.Image = editCategory.Categories.Image;
+                                   category.IdCategory = editCategory.Categories.IdCategory;
+                                   category.Recipes = editCategory.Categories.Recipes;
                                    Categories.Remove((Category)selectedItem);
                                    Categories.Add(category);
                                    int oldIndex = Categories.IndexOf(category);
-                                   Categories.Move(oldIndex,newIndex);
+                                   Categories.Move(oldIndex, newIndex);
                                    App.dbContext.Entry(category).State = EntityState.Modified;
                                    App.dbContext.SaveChanges();
-                                   
+
 
                                }
                            }

@@ -14,7 +14,7 @@ namespace RecipeBook.databaseClasses
         public virtual Recipe Recipe { get; set; }
         public object Clone()
         {
-           return this.MemberwiseClone();
+            return this.MemberwiseClone();
         }
     }
 }

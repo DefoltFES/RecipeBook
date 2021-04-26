@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class RecipeIngridient
+    public partial class RecipeIngridient:ICloneable
     {
         public long IdRecipe { get; set; }
         public long IdProduct { get; set; }
@@ -16,5 +16,9 @@ namespace RecipeBook.databaseClasses
         public virtual MeasurementUnit MeasurementUnit { get; set; }
         public virtual Product Product { get; set; }
         public virtual Recipe Recipe { get; set; }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

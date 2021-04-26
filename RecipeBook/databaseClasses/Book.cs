@@ -10,7 +10,7 @@ namespace RecipeBook.databaseClasses
     {
         public Book()
         {
-            BookRecipes = new ObservableCollection<BookRecipe>();
+            Recipes = new ObservableCollection<BookRecipe>();
         }
 
         public long IdBook { get; set; }
@@ -18,6 +18,6 @@ namespace RecipeBook.databaseClasses
         public string Description { get; set; }
         public byte[] Image { get; set; }
 
-        public virtual  ObservableCollection<BookRecipe> BookRecipes { get; set; }
+        public virtual ObservableCollection<BookRecipe> Recipes { get; set; }
     }
 }

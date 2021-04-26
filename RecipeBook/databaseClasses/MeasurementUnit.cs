@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class MeasurementUnit
+    public partial class MeasurementUnit:ICloneable
     {
         public MeasurementUnit()
         {
@@ -16,6 +16,10 @@ namespace RecipeBook.databaseClasses
         public long IdMeasurement { get; set; }
         public string Name { get; set; }
 
-        public virtual  ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

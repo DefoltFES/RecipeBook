@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
+//using RecipeBook.databaseClasses;
+using RecipeBook.viewModels;
 
 namespace RecipeBook.pages
 {
@@ -20,10 +23,17 @@ namespace RecipeBook.pages
     /// </summary>
     public partial class RecipePage : Page
     {
+
+
+        public RecipePage(Category category)
+        {
+            InitializeComponent();
+            DataContext = new RecipePageViewModel(category);
+        }
         public RecipePage()
         {
             InitializeComponent();
-            this.ListCategories.ItemsSource = new List<int>() {14, 4, 4, 4, 5, 5, 6, 7, 7};
+            DataContext = new RecipePageViewModel();
         }
     }
 }

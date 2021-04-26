@@ -19,51 +19,25 @@ namespace RecipeBook.viewModels
 {
     class MainPageViewModel:ViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<Category> popularCategoriesList;
-        RelayCommand deleteCommand;
-        RelayCommand addCommand;
-        public ObservableCollection<Category> PopularCategoriesList
-        {
-            get { return popularCategoriesList; }
-            set
-            {
-                popularCategoriesList = value;
-                OnPropertyChanged();
-            }
-        }
+
+
+        public ObservableCollection<Category> PopularCategoriesList { get; set; }
+
 
         public ObservableCollection<Book> LastBooks { get; set; }
 
-       
+
 
         public MainPageViewModel()
         {
             App.dbContext.Categories.Load();
             PopularCategoriesList = new ObservableCollection<Category>(App.dbContext.Categories.Local.ToBindingList());
-            LastBooks=new ObservableCollection<Book>(App.dbContext.Books.ToList());
+            LastBooks = new ObservableCollection<Book>(App.dbContext.Books.ToList());
         }
 
-        public RelayCommand DeleteCommand
-        {
-            get
-            {
-                return deleteCommand ??
-                       (deleteCommand = new RelayCommand((selectedItem) =>
-                       {
-                           var message =  MessageBox.Show("Вы хотите удалить категорию ?","Предупреждение",MessageBoxButton.OKCancel);
-                           if (selectedItem == null || message == MessageBoxResult.Cancel){ return;}
-                           Category category = selectedItem as Category;
-                           PopularCategoriesList.Remove(category);
-                           App.dbContext.Categories.Remove(category);
 
-                           App.dbContext.SaveChanges();
-                       }));
-            }
-        }
-       
 
-       
-       
+
+
     }
 }

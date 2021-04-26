@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class Instruction
+    public partial class Instruction:ICloneable
     {
         public long IdRecipe { get; set; }
         public long IdStep { get; set; }
@@ -13,5 +13,9 @@ namespace RecipeBook.databaseClasses
         public byte[] ImageStep { get; set; }
 
         public virtual Recipe Recipe { get; set; }
+        public object Clone()
+        {
+          return  this.MemberwiseClone();
+        }
     }
 }

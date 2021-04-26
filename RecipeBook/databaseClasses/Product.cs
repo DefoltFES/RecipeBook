@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace RecipeBook.databaseClasses
 {
-    public partial class Product
+    public partial class Product:ICloneable
     {
         public Product()
         {
@@ -17,5 +17,9 @@ namespace RecipeBook.databaseClasses
         public string Name { get; set; }
 
         public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public object Clone()
+        {
+           return this.MemberwiseClone();
+        }
     }
 }

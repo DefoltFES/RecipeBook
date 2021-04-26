@@ -24,7 +24,7 @@
                     </Border>
                 </Button>
             </DockPanel>
-                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Categories}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                     <ListView.ContextMenu>
                         <ContextMenu >
                             <MenuItem Command="{Binding EditCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  Header="Редактировать"></MenuItem>

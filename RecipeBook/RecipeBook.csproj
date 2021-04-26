@@ -12,6 +12,7 @@
     <None Remove="fonts\RalewaySemiBold.ttf" />
     <None Remove="images\140.png" />
     <None Remove="images\274.png" />
+    <None Remove="images\704.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
   </ItemGroup>
 
@@ -31,6 +33,7 @@
     <Resource Include="fonts\RalewaySemiBold.ttf" />
     <Resource Include="images\140.png" />
     <Resource Include="images\274.png" />
+    <Resource Include="images\704.png" />
   </ItemGroup>
 
   <ItemGroup>
