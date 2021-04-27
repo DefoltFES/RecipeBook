@@ -118,7 +118,7 @@ namespace RecipeBook.databaseClasses
                 entity.Property(e => e.IdCategory).HasColumnName("id_category");
 
                 entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Recipes)
+                    .WithMany(p => p.ListCategories)
                     .HasForeignKey(d => d.IdCategory)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 

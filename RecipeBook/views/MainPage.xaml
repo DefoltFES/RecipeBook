@@ -16,7 +16,7 @@
                 <TextBlock  FontSize="36" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource Medium}" Text="Популярные книги"></TextBlock>
 
                 <ListView Margin="0" Padding="0" ItemsSource="{Binding LastBooks}"   HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="LastBooks" BorderBrush="Transparent"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" MouseDoubleClick="LastBooks_MouseDoubleClick">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel   HorizontalAlignment="Center" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
@@ -38,19 +38,13 @@
                 </ListView>
                 <TextBlock Margin="0,28,0,0" FontSize="36" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource Medium}"> Популярные категории</TextBlock>
                
-                <ListView Name="Recipes" ItemsSource="{Binding PopularCategoriesList, UpdateSourceTrigger=PropertyChanged }"  BorderBrush="Transparent"    ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" >
+                <ListView x:Name="PopularCategories"  ItemsSource="{Binding PopularCategoriesList, UpdateSourceTrigger=PropertyChanged }"  BorderBrush="Transparent"    ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" MouseDoubleClick="PopularCategories_MouseDoubleClick" >
                         <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel   HorizontalAlignment="Center" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
-                    <ListView.ContextMenu>
-                        <ContextMenu >
-                            <MenuItem   Header="Редактировать"></MenuItem>
-                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  Header="Удалить"></MenuItem>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
-                        <ListView.ItemTemplate>
+                    <ListView.ItemTemplate>
                             <DataTemplate>
                             <Border Margin="20" Padding="10,10,10,10"  BorderBrush="{StaticResource MainColor}"  HorizontalAlignment="Center" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
                             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">

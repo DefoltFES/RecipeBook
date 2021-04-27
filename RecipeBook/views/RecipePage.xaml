@@ -28,8 +28,8 @@
                 <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Recipes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                     <ListView.ContextMenu>
                         <ContextMenu >
-                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
-                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
+                            <MenuItem  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
+                            <MenuItem  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.ItemsPanel>

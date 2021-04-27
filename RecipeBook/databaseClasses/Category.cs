@@ -10,14 +10,14 @@ namespace RecipeBook.databaseClasses
     {
         public Category()
         {
-            Recipes = new ObservableCollection<ListCategory>();
+            ListCategories = new ObservableCollection<ListCategory>();
         }
 
         public long IdCategory { get; set; }
         public string Name { get; set; }
         public byte[] Image { get; set; }
 
-        public virtual ObservableCollection<ListCategory> Recipes { get; set; }
+        public virtual ObservableCollection<ListCategory> ListCategories { get; set; }
         public object Clone()
         {
             return  this.MemberwiseClone();

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using RecipeBook.databaseClasses;
 using RecipeBook.pages;
 using RecipeBook.viewModels;
 
@@ -28,24 +29,22 @@ namespace RecipeBook
         public MainPage()
         {
             InitializeComponent();
-            
-          
-           
-
-        }
-
-
-        
-
-       
-        private void DeleteCategoryExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            
         }
 
         private void MainPage_OnLoaded(object sender, RoutedEventArgs e)
         {
             DataContext = new MainPageViewModel();
+        }
+
+        private void LastBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void PopularCategories_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = PopularCategories.SelectedItem as Category;
+            this.NavigationService.Navigate(new RecipePage(item));
         }
     }
 }

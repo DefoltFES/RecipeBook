@@ -33,8 +33,8 @@ namespace RecipeBook.viewModels
 
         public CategoriesPageViewModel()
         {
-            App.dbContext.Categories.Load();
-            Categories = App.dbContext.Categories.Local.ToObservableCollection();
+            App.dbContext.Categories.Include(x => x.ListCategories).ThenInclude(x=>x);
+            Categories = new ObservableCollection<Category>(App.dbContext.Categories.ToList());;
         }
 
         public RelayCommand DeleteCommand
@@ -93,7 +93,7 @@ namespace RecipeBook.viewModels
                                    category.Name = editCategory.Categories.Name;
                                    category.Image = editCategory.Categories.Image;
                                    category.IdCategory = editCategory.Categories.IdCategory;
-                                   category.Recipes = editCategory.Categories.Recipes;
+                                   category.ListCategories = editCategory.Categories.ListCategories;
                                    Categories.Remove((Category)selectedItem);
                                    Categories.Add(category);
                                    int oldIndex = Categories.IndexOf(category);

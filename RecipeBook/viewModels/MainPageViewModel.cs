@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
-using Prism.Commands;
-using RecipeBook.Annotations;
+﻿using Microsoft.EntityFrameworkCore;
 using RecipeBook.databaseClasses;
-using RecipeBook.pages;
-using RecipeBook.service;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace RecipeBook.viewModels
 {
-    class MainPageViewModel:ViewModel
+    class MainPageViewModel : ViewModel
     {
 
 
@@ -30,8 +18,8 @@ namespace RecipeBook.viewModels
 
         public MainPageViewModel()
         {
-            App.dbContext.Categories.Load();
-            PopularCategoriesList = new ObservableCollection<Category>(App.dbContext.Categories.Local.ToBindingList());
+
+            PopularCategoriesList = new ObservableCollection<Category>(App.dbContext.Categories.Include(c => c.ListCategories).ThenInclude(r=>r.Recipe).ToList().OrderByDescending(b=>b.ListCategories.Count()).Take(5));
             LastBooks = new ObservableCollection<Book>(App.dbContext.Books.ToList());
         }
 
