@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
 using RecipeBook.viewModels;
 
 namespace RecipeBook.pages
@@ -32,12 +33,16 @@ namespace RecipeBook.pages
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            this.NavigationService.GoBack();
             
         }
 
-        
 
-       
+      
+        private void ListCategories_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ListCategories.SelectedItem as Category;
+            this.NavigationService.Navigate(new RecipePage(item));
+        }
     }
 }

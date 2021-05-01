@@ -10,23 +10,23 @@ namespace RecipeBook.databaseClasses
     {
         public Recipe()
         {
-            Book = new ObservableCollection<BookRecipe>();
-            Instructions = new ObservableCollection<Instruction>();
-            ListCategories = new ObservableCollection<ListCategory>();
-            RecipeIngridients = new ObservableCollection<RecipeIngridient>();
+            Book = new HashSet<BookRecipe>();
+            Instructions = new HashSet<Instruction>();
+            ListCategories = new HashSet<ListCategory>();
+            RecipeIngridients = new HashSet<RecipeIngridient>();
         }
 
         public long IdRecipe { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public byte[] Image { get; set; }
-        public long? CookTime { get; set; }
-        public long? NumService { get; set; }
+        public string Image { get; set; }
+        public int? CookTime { get; set; }
+        public int? NumService { get; set; }
 
-        public virtual ObservableCollection<BookRecipe> Book { get; set; }
-        public virtual ObservableCollection<Instruction> Instructions { get; set; }
-        public virtual ObservableCollection<ListCategory> ListCategories { get; set; }
-        public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public virtual ICollection<BookRecipe> Book { get; set; }
+        public virtual ICollection<Instruction> Instructions { get; set; }
+        public virtual ICollection<ListCategory> ListCategories { get; set; }
+        public virtual ICollection<RecipeIngridient> RecipeIngridients { get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

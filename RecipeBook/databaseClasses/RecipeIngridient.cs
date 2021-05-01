@@ -16,6 +16,7 @@ namespace RecipeBook.databaseClasses
         public virtual MeasurementUnit MeasurementUnit { get; set; }
         public virtual Product Product { get; set; }
         public virtual Recipe Recipe { get; set; }
+
         public object Clone()
         {
             return this.MemberwiseClone();

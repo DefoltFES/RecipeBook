@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using RecipeBook.databaseClasses;
 //using RecipeBook.databaseClasses;
 using RecipeBook.viewModels;
+using RecipeBook.views;
 
 namespace RecipeBook.pages
 {
@@ -34,6 +35,16 @@ namespace RecipeBook.pages
         {
             InitializeComponent();
             DataContext = new RecipePageViewModel();
+        }
+
+        private void BackClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
+
+        private void ListRecipes_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.NavigationService.Navigate(new FullRecipePage(ListRecipes.SelectedItem as Recipe));
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,12 +46,28 @@ namespace RecipeBook.viewModels
                 return deleteCommand ??
                        (deleteCommand = new RelayCommand((selectedItem) =>
                        {
-                           var message = MessageBox.Show("Вы хотите удалить категорию ?", "Предупреждение", MessageBoxButton.OKCancel);
-                           if (selectedItem == null || message == MessageBoxResult.Cancel) { return; }
+                           if (selectedItem == null)
+                           {
+                               return;
+                           }
                            Category categories = selectedItem as Category;
+                           if (categories.IdCategory == 1)
+                           {
+                               MessageBox.Show("Нельзя удалить эту категорию");
+                               return;
+                           }
+                           var message = MessageBox.Show("Вы хотите удалить категорию ?", "Предупреждение", MessageBoxButton.OKCancel);
+                           var path = System.AppDomain.CurrentDomain.BaseDirectory + categories.Image;
+                           if (message == MessageBoxResult.Cancel) { return; }
                            Categories.Remove(categories);
+                           if (File.Exists(path))
+                           {
+                               File.Delete(path);
+                           }
+                           App.dbContext.ListCategories.RemoveRange(categories.ListCategories);
                            App.dbContext.Categories.Remove(categories);
                            App.dbContext.SaveChanges();
+                           
                        }));
             }
         }
@@ -64,7 +82,7 @@ namespace RecipeBook.viewModels
                            CreateOrEditCategory addCategoryWindow = new CreateOrEditCategory(new Category());
                            if (addCategoryWindow.ShowDialog() == true)
                            {
-                               Category categories = addCategoryWindow.Categories;
+                               Category categories =addCategoryWindow.Categories;
                                Categories.Add(categories);
                                App.dbContext.Categories.Add(categories);
                                App.dbContext.SaveChanges();
@@ -77,8 +95,14 @@ namespace RecipeBook.viewModels
                        (editCommand = new RelayCommand((selectedItem) =>
                        {
                            if (selectedItem == null) return;
-                           int newIndex = Categories.IndexOf((Category)selectedItem);
                            Category category = selectedItem as Category;
+                           if (category.IdCategory == 1)
+                           {
+                               MessageBox.Show("Нельзя редактировать эту категорию");
+                               return;
+                           }
+                           int newIndex = Categories.IndexOf((Category)selectedItem);
+                          
                            Category vm = (Category)category.Clone();
                            CreateOrEditCategory editCategory = new CreateOrEditCategory(vm);
                            if (editCategory.ShowDialog() == true)
@@ -89,11 +113,10 @@ namespace RecipeBook.viewModels
 
                                if (category != null)
                                {
-
-                                   category.Name = editCategory.Categories.Name;
+                                   var path = System.AppDomain.CurrentDomain.BaseDirectory + category.Image;
+                                   File.Delete(path);
                                    category.Image = editCategory.Categories.Image;
-                                   category.IdCategory = editCategory.Categories.IdCategory;
-                                   category.ListCategories = editCategory.Categories.ListCategories;
+                                   category.Name = editCategory.Categories.Name;
                                    Categories.Remove((Category)selectedItem);
                                    Categories.Add(category);
                                    int oldIndex = Categories.IndexOf(category);

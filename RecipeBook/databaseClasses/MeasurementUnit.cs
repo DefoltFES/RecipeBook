@@ -10,13 +10,13 @@ namespace RecipeBook.databaseClasses
     {
         public MeasurementUnit()
         {
-            RecipeIngridients = new ObservableCollection<RecipeIngridient>();
+            RecipeIngridients = new HashSet<RecipeIngridient>();
         }
 
         public long IdMeasurement { get; set; }
         public string Name { get; set; }
 
-        public virtual ObservableCollection<RecipeIngridient> RecipeIngridients { get; set; }
+        public virtual ICollection<RecipeIngridient> RecipeIngridients { get; set; }
         public object Clone()
         {
             return this.MemberwiseClone();

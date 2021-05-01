@@ -10,14 +10,14 @@ namespace RecipeBook.databaseClasses
     {
         public Book()
         {
-            Recipes = new ObservableCollection<BookRecipe>();
+            Recipes = new HashSet<BookRecipe>();
         }
 
         public long IdBook { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
-        public virtual ObservableCollection<BookRecipe> Recipes { get; set; }
+        public virtual ICollection<BookRecipe> Recipes { get; set; }
     }
 }

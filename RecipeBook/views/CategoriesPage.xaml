@@ -24,7 +24,7 @@
                     </Border>
                 </Button>
             </DockPanel>
-                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Categories}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                <ListView Margin="0,22,0,0" x:Name="ListCategories"  ItemsSource="{Binding Categories}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single"  MouseDoubleClick="ListCategories_OnMouseDoubleClick">
                     <ListView.ContextMenu>
                         <ContextMenu >
                             <MenuItem Command="{Binding EditCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"  Header="Редактировать"></MenuItem>
@@ -40,7 +40,7 @@
                         <DataTemplate>
                             <Border Margin="20" Padding="10,10,10,10"  BorderBrush="{StaticResource MainColor}"  HorizontalAlignment="Center" Width="200" Height="200" BorderThickness="1" CornerRadius="28">
                                 <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-                                    <Image HorizontalAlignment="Center" Width="140" Height="140" Stretch="UniformToFill" x:Name="CategoriesImage" Source="{Binding Image}"></Image>
+                                    <Image HorizontalAlignment="Center" Width="140" Height="140" Stretch="UniformToFill" x:Name="CategoriesImage" Source="{Binding Image,Converter={StaticResource ImageConvertor},TargetNullValue={StaticResource SmallImage}}"></Image>
                                     <TextBlock HorizontalAlignment="Center" Width="140" TextWrapping="Wrap" x:Name="TextCategory" Foreground="{StaticResource MainColor}" FontFamily="{StaticResource Regular}" FontSize="24" TextAlignment="Center" Margin="0,10,0,0" Text="{Binding Name}"></TextBlock>
                                 </StackPanel>
                             </Border>

@@ -18,14 +18,14 @@
                             <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Создать</TextBlock>
                         </Border>
                     </Button>
-                    <Button DockPanel.Dock="Right" x:Name="BackButton"  Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackClick"  Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
                         <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                             <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Назад</TextBlock>
                         </Border>
                     </Button>
                 </DockPanel>
 
-                <ListView Margin="0,22,0,0" x:Name="ListCategories" ItemsSource="{Binding Recipes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
+                <ListView Margin="0,22,0,0" x:Name="ListRecipes" ItemsSource="{Binding Recipes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" MouseDoubleClick="ListRecipes_OnMouseDoubleClick">
                     <ListView.ContextMenu>
                         <ContextMenu >
                             <MenuItem  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
@@ -43,11 +43,10 @@
                                 <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage}}"></Image>
                                 <StackPanel Margin="12,5,12,36">
                                     <TextBlock  TextAlignment="Left" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="22" Text="{Binding Name}"></TextBlock>
-                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding CookTime}"></TextBlock>
-                                    <TextBlock Height="74" TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="WrapWithOverflow" FontSize="16" Text="{Binding Description}">
+                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding CookTime, Converter={StaticResource ConvectorTime}}"></TextBlock>
+                                    <TextBlock TextTrimming="WordEllipsis" Height="74" TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="WrapWithOverflow" FontSize="16" Text="{Binding Description}">
                                     </TextBlock>
                                 </StackPanel>
-                              
 
                             </StackPanel>
                         </DataTemplate>

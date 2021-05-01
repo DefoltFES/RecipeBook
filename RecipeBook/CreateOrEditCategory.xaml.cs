@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using RecipeBook.databaseClasses;
 using RecipeBook.viewModels;
+using Path = System.IO.Path;
 
 namespace RecipeBook
 {
@@ -42,26 +44,52 @@ namespace RecipeBook
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                ImageCategory.Source = new BitmapImage(fileUri); ;
+                Categories.Image = openFileDialog.FileName;
             }
-
         }
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Categories.Image = BitmapSourceToByteArray((BitmapSource)ImageCategory.Source);
-            this.DialogResult = true;
-        }
-
-        private byte[] BitmapSourceToByteArray(BitmapSource image)
-        {
-            using (var stream = new MemoryStream())
+            if (Name.Text.Length > 0)
             {
-                var encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(stream);
-                return stream.ToArray();
+                Categories.Image = CopyAndSaveImages();
+                this.DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Show("Название категории не может быть пустым");
+                return;
             }
         }
+
+        private string CopyAndSaveImages()
+        {
+            if (Categories.Image != null)
+            {
+                var fullDirectoryPath = System.AppDomain.CurrentDomain.BaseDirectory+ @"images\categories";
+                if (!Directory.Exists(fullDirectoryPath))
+                {
+                    Directory.CreateDirectory(fullDirectoryPath);
+                }
+                var nameImage = Path.GetFileName(Categories.Image);
+                var newImageSource = Path.Combine(fullDirectoryPath,nameImage);
+                if (Path.IsPathFullyQualified(Categories.Image))
+                {
+                    File.Copy(Categories.Image, newImageSource, true);
+                    return Path.Combine(@"\images\categories", nameImage);
+                }
+                else
+                {
+                    return Categories.Image;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        
     }
 }

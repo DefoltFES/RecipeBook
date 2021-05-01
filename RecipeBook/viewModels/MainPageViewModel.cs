@@ -18,8 +18,7 @@ namespace RecipeBook.viewModels
 
         public MainPageViewModel()
         {
-
-            PopularCategoriesList = new ObservableCollection<Category>(App.dbContext.Categories.Include(c => c.ListCategories).ThenInclude(r=>r.Recipe).ToList().OrderByDescending(b=>b.ListCategories.Count()).Take(5));
+            PopularCategoriesList = new ObservableCollection<Category>(App.dbContext.Categories.OrderByDescending(x=>x.ListCategories.Count()).Take(5));
             LastBooks = new ObservableCollection<Book>(App.dbContext.Books.ToList());
         }
 
