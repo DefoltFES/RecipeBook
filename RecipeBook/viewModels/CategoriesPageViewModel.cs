@@ -60,7 +60,7 @@ namespace RecipeBook.viewModels
                            var path = System.AppDomain.CurrentDomain.BaseDirectory + categories.Image;
                            if (message == MessageBoxResult.Cancel) { return; }
                            Categories.Remove(categories);
-                           if (File.Exists(path))
+                           if (categories.Image==null)
                            {
                                File.Delete(path);
                            }

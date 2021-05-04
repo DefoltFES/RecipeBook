@@ -12,7 +12,10 @@ namespace RecipeBook.service
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
+            if(value is null)
+            {
+                return null;
+            }
             if ((int) value > 60)
             {
                 return "Время:>60";

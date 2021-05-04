@@ -19,6 +19,11 @@ namespace RecipeBook.service
             {
                 return null;
             }
+
+            if (value is Uri uri)
+            {
+                fileUri = uri;
+            }
             if (Path.IsPathFullyQualified(value.ToString()))
             {
                  fileUri = new Uri(value.ToString(), UriKind.Absolute);
@@ -33,7 +38,7 @@ namespace RecipeBook.service
             {
                 return null;
             }
-
+            
             var b1 = new BitmapImage();
             b1.BeginInit();
             b1.UriSource = fileUri;
@@ -46,7 +51,7 @@ namespace RecipeBook.service
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return new Uri(value.ToString()).LocalPath;
         }
     }
 }

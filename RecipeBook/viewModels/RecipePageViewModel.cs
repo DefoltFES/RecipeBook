@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Automation.Peers;
 using Microsoft.EntityFrameworkCore;
 using RecipeBook.databaseClasses;
+using RecipeBook.service;
 
 
 namespace RecipeBook.viewModels
@@ -27,6 +30,9 @@ namespace RecipeBook.viewModels
                 OnPropertyChanged();
             }
         }
+        RelayCommand deleteCommand;
+        RelayCommand addCommand;
+        RelayCommand editCommand;
 
         public RecipePageViewModel(Category category)
         {
@@ -50,5 +56,118 @@ namespace RecipeBook.viewModels
             var  item=  App.dbContext.Recipes.Include(x => x.ListCategories).ThenInclude(x => x.Category).ToList();
             Recipes = new ObservableCollection<Recipe>(App.dbContext.Recipes.ToList());
         }
+
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                       (addCommand = new RelayCommand((o) =>
+                       {
+                           CreateOrEditRecipe addRecipeWindow = new CreateOrEditRecipe(new Recipe());
+                           if (addRecipeWindow.ShowDialog() == true)
+                           {
+                               Recipe recipe = addRecipeWindow.Context.Recipe;
+                               Recipes.Add(recipe);
+                               App.dbContext.Recipes.Add(recipe);
+                               App.dbContext.SaveChanges();
+                           }
+                       }));
+            }
+        }
+
+
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ??
+                       (deleteCommand = new RelayCommand((selectedItem) =>
+                       {
+                           if (selectedItem == null)
+                           {
+                               return;
+                           }
+
+                           var recipe = selectedItem as Recipe;
+                           var message = MessageBox.Show("Вы хотите удалить рецепт ?", "Предупреждение", MessageBoxButton.OKCancel);
+                           var path = System.AppDomain.CurrentDomain.BaseDirectory + recipe.Image;
+                           if (message == MessageBoxResult.Cancel) { return; }
+                           Recipes.Remove(recipe);
+                           if (recipe.Image != null)
+                           {
+                               File.Delete(path);
+                           }
+                           foreach (var image in recipe.Instructions)
+                           {
+                               if (image.ImageStep != null)
+                               {
+                                   File.Delete(System.AppDomain.CurrentDomain.BaseDirectory+image.ImageStep);
+                               } 
+                           }
+                           App.dbContext.RecipeIngridients.RemoveRange(recipe.RecipeIngridients);
+                           App.dbContext.Instructions.RemoveRange(recipe.Instructions);
+                           App.dbContext.ListCategories.RemoveRange(recipe.ListCategories);
+                           App.dbContext.BookRecipes.RemoveRange(recipe.Book);
+                           App.dbContext.Recipes.Remove(recipe);
+                           App.dbContext.SaveChanges();
+                       }));
+            }
+        }
+
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ?? (editCommand = new RelayCommand((selectedItem) =>
+                {
+                    if (selectedItem == null) return;
+                    Recipe recipe = selectedItem as Recipe;
+                    
+                    int newIndex = Recipes.IndexOf((Recipe)selectedItem);
+
+                    Recipe vm = (Recipe)recipe.Clone();
+                    CreateOrEditRecipe editRecipe = new CreateOrEditRecipe(vm);
+                    if (editRecipe.ShowDialog() == true)
+                    {
+                        //Recipes.Remove((Recipe)selectedItem);
+
+                        recipe = App.dbContext.Recipes.Find(editRecipe.Context.Recipe.IdRecipe);
+
+                        //if (recipe != null)
+                        //{
+                        //    if (recipe.Image != null)
+                        //    {
+                        //        var path = System.AppDomain.CurrentDomain.BaseDirectory + recipe.Image;
+                        //        File.Delete(path);
+                        //    }
+
+                        //    foreach (var image in recipe.Instructions)
+                        //    {
+                        //        if (image.ImageStep != null)
+                        //        {
+                        //            File.Delete(System.AppDomain.CurrentDomain.BaseDirectory + image.ImageStep);
+                        //        }
+                        //    }
+
+                            //recipe.Description = editRecipe.Context.Description;
+                            //recipe.ListCategories = editRecipe.Context.Categories.ToList();
+                            //recipe.CookTime = editRecipe.Context.CookTime;
+                            //recipe.Name = editRecipe.Context.Name;
+                            //Recipes.Remove((Recipe)selectedItem);
+                            //Recipes.Add(recipe);
+                            //int oldIndex = Recipes.IndexOf(recipe);
+                            //Recipes.Move(oldIndex, newIndex);
+                            App.dbContext.Entry(recipe).State = EntityState.Modified;
+                            App.dbContext.SaveChanges();
+
+
+                        //}
+                    }
+                }));
+            }
+        }
+
+
     }
 }

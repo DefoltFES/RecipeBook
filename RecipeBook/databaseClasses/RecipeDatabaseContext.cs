@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
@@ -32,7 +33,7 @@ namespace RecipeBook.databaseClasses
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseLazyLoadingProxies().UseSqlite("DataSource=database/RecipeDatabase.db;");
+                optionsBuilder.UseLazyLoadingProxies().ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning)).UseSqlite("DataSource=database/RecipeDatabase.db;");
             }
         }
 
@@ -89,13 +90,13 @@ namespace RecipeBook.databaseClasses
 
             modelBuilder.Entity<Instruction>(entity =>
             {
-                entity.HasKey(e => new { e.IdRecipe, e.IdStep });
+                entity.HasKey(e => e.IdInstruction );
 
                 entity.ToTable("instructions");
 
                 entity.Property(e => e.IdRecipe).HasColumnName("id_recipe");
 
-                entity.Property(e => e.IdStep).HasColumnName("id_step");
+                entity.Property(e => e.IdInstruction).HasColumnName("id_instruction");
 
                 entity.Property(e => e.DescriptionStep).HasColumnName("description_step");
 

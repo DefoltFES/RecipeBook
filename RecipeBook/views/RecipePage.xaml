@@ -13,7 +13,7 @@
             <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
                 <DockPanel  HorizontalAlignment="Stretch" >
                     <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource Regular }" Foreground="{StaticResource TextColor}" Text="{Binding Title}"></TextBlock>
-                    <Button DockPanel.Dock="Right"    Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Button Command="{Binding AddCommand}" DockPanel.Dock="Right"    Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
                         <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                             <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Создать</TextBlock>
                         </Border>
@@ -28,8 +28,8 @@
                 <ListView Margin="0,22,0,0" x:Name="ListRecipes" ItemsSource="{Binding Recipes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" MouseDoubleClick="ListRecipes_OnMouseDoubleClick">
                     <ListView.ContextMenu>
                         <ContextMenu >
-                            <MenuItem  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
-                            <MenuItem  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
+                            <MenuItem  Command="{Binding EditCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
+                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.ItemsPanel>
@@ -40,7 +40,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="270" Height="446" Background="{StaticResource MainColor}">
-                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage}}"></Image>
+                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}"></Image>
                                 <StackPanel Margin="12,5,12,36">
                                     <TextBlock  TextAlignment="Left" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="22" Text="{Binding Name}"></TextBlock>
                                     <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding CookTime, Converter={StaticResource ConvectorTime}}"></TextBlock>
