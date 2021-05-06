@@ -34,7 +34,11 @@ namespace RecipeBook
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-          
+            if (this.Ingridients.Items.Count==0)
+            {
+                MessageBox.Show("Нужен хотя бы один ингридиент");
+                return;
+            }
             this.DialogResult = true;
         }
 
@@ -45,11 +49,13 @@ namespace RecipeBook
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        
-           
 
-     
-
-       
+        private void Name_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if ( Name.Text.Length > 0)
+            {
+                SaveButton.IsEnabled = true;
+            }
+        }
     }
 }

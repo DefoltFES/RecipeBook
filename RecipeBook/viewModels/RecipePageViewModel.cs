@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using Microsoft.EntityFrameworkCore;
+using RecipeBook.Annotations;
 using RecipeBook.databaseClasses;
 using RecipeBook.service;
 
@@ -61,18 +62,28 @@ namespace RecipeBook.viewModels
         {
             get
             {
-                return addCommand ??
-                       (addCommand = new RelayCommand((o) =>
-                       {
-                           CreateOrEditRecipe addRecipeWindow = new CreateOrEditRecipe(new Recipe());
-                           if (addRecipeWindow.ShowDialog() == true)
-                           {
-                               Recipe recipe = addRecipeWindow.Context.Recipe;
-                               Recipes.Add(recipe);
-                               App.dbContext.Recipes.Add(recipe);
-                               App.dbContext.SaveChanges();
-                           }
-                       }));
+                return addCommand ??= new RelayCommand((o) =>
+                {
+                    CreateOrEditRecipe addRecipeWindow = new CreateOrEditRecipe(new Recipe());
+                    if (addRecipeWindow.ShowDialog() == true)
+                    {
+                      
+                        Recipe recipe = new Recipe()
+                        {
+                            Image = addRecipeWindow.Context.Image,
+                            Description = addRecipeWindow.Context.Description,
+                            CookTime = addRecipeWindow.Context.CookTime,
+                            Name = addRecipeWindow.Context.Name,
+                            NumService = addRecipeWindow.Context.NumService,
+                            Instructions = addRecipeWindow.Context.Instructions,
+                            RecipeIngridients = addRecipeWindow.Context.Ingridients
+                        };
+                        
+                        Recipes.Add(recipe);
+                        App.dbContext.Recipes.Add(recipe);
+                        App.dbContext.SaveChanges();
+                    }
+                });
             }
         }
 
@@ -130,44 +141,50 @@ namespace RecipeBook.viewModels
                     CreateOrEditRecipe editRecipe = new CreateOrEditRecipe(vm);
                     if (editRecipe.ShowDialog() == true)
                     {
-                        //Recipes.Remove((Recipe)selectedItem);
+                        Recipes.Remove((Recipe)selectedItem);
 
                         recipe = App.dbContext.Recipes.Find(editRecipe.Context.Recipe.IdRecipe);
 
-                        //if (recipe != null)
-                        //{
-                        //    if (recipe.Image != null)
-                        //    {
-                        //        var path = System.AppDomain.CurrentDomain.BaseDirectory + recipe.Image;
-                        //        File.Delete(path);
-                        //    }
-
-                        //    foreach (var image in recipe.Instructions)
-                        //    {
-                        //        if (image.ImageStep != null)
-                        //        {
-                        //            File.Delete(System.AppDomain.CurrentDomain.BaseDirectory + image.ImageStep);
-                        //        }
-                        //    }
-
-                            //recipe.Description = editRecipe.Context.Description;
-                            //recipe.ListCategories = editRecipe.Context.Categories.ToList();
-                            //recipe.CookTime = editRecipe.Context.CookTime;
-                            //recipe.Name = editRecipe.Context.Name;
-                            //Recipes.Remove((Recipe)selectedItem);
-                            //Recipes.Add(recipe);
-                            //int oldIndex = Recipes.IndexOf(recipe);
-                            //Recipes.Move(oldIndex, newIndex);
-                            App.dbContext.Entry(recipe).State = EntityState.Modified;
+                        if (recipe != null)
+                        {
+                            if ( editRecipe.Context.Image!=recipe.Image)
+                            {
+                                var path = System.AppDomain.CurrentDomain.BaseDirectory + recipe.Image;
+                                File.Delete(path);
+                            }
+                            foreach (var image in recipe.Instructions)
+                            {
+                                foreach (var imageInstruction in editRecipe.Context.Instructions)
+                                {
+                                    if (imageInstruction.ImageStep != image.ImageStep)
+                                    {
+                                        File.Delete(System.AppDomain.CurrentDomain.BaseDirectory + image.ImageStep);
+                                    }
+                                }
+                                
+                            }
+                            recipe.NumService = editRecipe.Context.NumService;
+                            recipe.Image = editRecipe.Context.Image;
+                            recipe.Instructions = editRecipe.Context.Instructions.ToList();
+                            recipe.RecipeIngridients = editRecipe.Context.Ingridients.ToList();
+                            recipe.Description = editRecipe.Context.Description;
+                            recipe.ListCategories = editRecipe.Context.Categories.ToList();
+                            recipe.CookTime = editRecipe.Context.CookTime;
+                            recipe.Name = editRecipe.Context.Name;
+                            Recipes.Remove((Recipe)selectedItem);
+                            Recipes.Add(recipe);
+                            int oldIndex = Recipes.IndexOf(recipe);
+                            Recipes.Move(oldIndex, newIndex);
+                            App.dbContext.Update(recipe);
                             App.dbContext.SaveChanges();
-
-
-                        //}
+                        }
                     }
                 }));
             }
+
         }
 
+     
 
     }
 }

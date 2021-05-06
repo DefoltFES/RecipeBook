@@ -25,33 +25,19 @@ namespace RecipeBook
     /// </summary>
     public partial class CreateOrEditCategory : Window
     {
-        public Category Categories { get; private set; }
+        public CreateOrEditCategoryViewModel Context { get; private set; }
         public CreateOrEditCategory(Category categories)
         {
             InitializeComponent();
-            Categories = categories;
-            this.DataContext = Categories;
+            Context = new CreateOrEditCategoryViewModel(categories);
+            this.DataContext = Context;
 
         }
-        private void ImageButtonAdd_OnClick(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog()
-            {
-                Filter = "Image File (*.jpg;*.bmp;*.png)|*.jpg;*.bmp;*.png",
-                CheckPathExists = true,
-                Multiselect = false
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                Categories.Image = openFileDialog.FileName;
-            }
-        }
+      
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (Name.Text.Length > 0)
             {
-                Categories.Image = CopyAndSaveImages();
                 this.DialogResult = true;
             }
             else
@@ -61,34 +47,7 @@ namespace RecipeBook
             }
         }
 
-        private string CopyAndSaveImages()
-        {
-            if (Categories.Image != null)
-            {
-                var fullDirectoryPath = System.AppDomain.CurrentDomain.BaseDirectory+ @"images\categories";
-                if (!Directory.Exists(fullDirectoryPath))
-                {
-                    Directory.CreateDirectory(fullDirectoryPath);
-                }
-                var nameImage = Path.GetFileName(Categories.Image);
-                var newImageSource = Path.Combine(fullDirectoryPath,nameImage);
-                if (Path.IsPathFullyQualified(Categories.Image))
-                {
-                    File.Copy(Categories.Image, newImageSource, true);
-                    return Path.Combine(@"\images\categories", nameImage);
-                }
-                else
-                {
-                    return Categories.Image;
-                }
 
-            }
-            else
-            {
-                return null;
-            }
-
-        }
 
         
     }

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:RecipeBook.pages" xmlns:viewmodels="clr-namespace:RecipeBook.viewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RecipePageViewModel}"
+      xmlns:local="clr-namespace:RecipeBook.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RecipePage">
@@ -40,7 +40,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="270" Height="446" Background="{StaticResource MainColor}">
-                                <Image HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}"></Image>
+                                <Image HorizontalAlignment="Stretch" Stretch="Fill" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}"></Image>
                                 <StackPanel Margin="12,5,12,36">
                                     <TextBlock  TextAlignment="Left" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="22" Text="{Binding Name}"></TextBlock>
                                     <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding CookTime, Converter={StaticResource ConvectorTime}}"></TextBlock>

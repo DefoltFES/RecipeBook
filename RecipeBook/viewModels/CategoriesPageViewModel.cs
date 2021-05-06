@@ -60,7 +60,7 @@ namespace RecipeBook.viewModels
                            var path = System.AppDomain.CurrentDomain.BaseDirectory + categories.Image;
                            if (message == MessageBoxResult.Cancel) { return; }
                            Categories.Remove(categories);
-                           if (categories.Image==null)
+                           if (categories.Image!=null)
                            {
                                File.Delete(path);
                            }
@@ -82,7 +82,7 @@ namespace RecipeBook.viewModels
                            CreateOrEditCategory addCategoryWindow = new CreateOrEditCategory(new Category());
                            if (addCategoryWindow.ShowDialog() == true)
                            {
-                               Category categories =addCategoryWindow.Categories;
+                               Category categories =(Category)addCategoryWindow.Context.Category.Clone();
                                Categories.Add(categories);
                                App.dbContext.Categories.Add(categories);
                                App.dbContext.SaveChanges();
@@ -109,19 +109,19 @@ namespace RecipeBook.viewModels
                            {
                                Categories.Remove((Category)selectedItem);
 
-                               category = App.dbContext.Categories.Find(editCategory.Categories.IdCategory);
+                               category = App.dbContext.Categories.Find(editCategory.Context.Category.IdCategory);
 
                                if (category != null)
                                {
                                    var path = System.AppDomain.CurrentDomain.BaseDirectory + category.Image;
                                    File.Delete(path);
-                                   category.Image = editCategory.Categories.Image;
-                                   category.Name = editCategory.Categories.Name;
+                                   category.Image = editCategory.Context.Image;
+                                   category.Name = editCategory.Context.Name;
                                    Categories.Remove((Category)selectedItem);
                                    Categories.Add(category);
                                    int oldIndex = Categories.IndexOf(category);
                                    Categories.Move(oldIndex, newIndex);
-                                   App.dbContext.Entry(category).State = EntityState.Modified;
+                                   App.dbContext.Update(category);
                                    App.dbContext.SaveChanges();
 
 

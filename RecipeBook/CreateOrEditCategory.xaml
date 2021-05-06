@@ -12,8 +12,8 @@
                 <TextBlock FontSize="24" FontFamily="{StaticResource Regular}" Foreground="{StaticResource TextColor}">
                     Изображение
                 </TextBlock>
-                <Image x:Name="ImageCategory"  Margin="0,24,0,0" HorizontalAlignment="Center"  Stretch="UniformToFill" Width="140" Height="140" Source="{Binding Image,TargetNullValue={StaticResource SmallImage},Converter={StaticResource ImageConvertor},Mode=OneWay}"></Image>
-                <Button x:Name="ImageButtonAdd" Click="ImageButtonAdd_OnClick" Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                <Image x:Name="ImageCategory"  Margin="0,24,0,0" HorizontalAlignment="Center"  Stretch="Fill" Width="140" Height="140" Source="{Binding Image,TargetNullValue={StaticResource SmallImage},Converter={StaticResource ImageConvertor},Mode=TwoWay}"></Image>
+                <Button x:Name="ImageButtonAdd" Command="{Binding AddImage}" CommandParameter="{Binding ElementName=ImageCategory}" Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Обзор</TextBlock>
                     </Border>
@@ -22,7 +22,7 @@
                 <Border CornerRadius="5" HorizontalAlignment="Left" Width="236" BorderBrush="{StaticResource MainColor}" BorderThickness="1">
                     <TextBox x:Name="Name"   FontSize="24" Foreground="{StaticResource TextColor}"  FontFamily="{StaticResource Regular}" BorderBrush="Transparent" Text="{Binding Name}"></TextBox>
                 </Border>
-                <Button   Margin="0,20" x:Name="SaveButton"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent" Click="SaveButton_OnClick">
+                <Button Command="{Binding SaveChanges}"  Margin="0,20" x:Name="SaveButton"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent" Click="SaveButton_OnClick">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Сохранить изменения</TextBlock>
                     </Border>

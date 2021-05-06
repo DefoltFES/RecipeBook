@@ -30,6 +30,9 @@ namespace RecipeBook.viewModels
         private RelayCommand addInstruction;
         private RelayCommand addImage;
         private RelayCommand saveChanges;
+        private RelayCommand deleteIngridients;
+        private RelayCommand deleteInstruction;
+        private RelayCommand deleteCategories;
         public CreateOrEditRecipeViewModel(Recipe r)
         {
             recipe = r;
@@ -126,38 +129,64 @@ namespace RecipeBook.viewModels
         {
             get
             {
-                return addCategories ??
-                       (addCategories = new RelayCommand((o) =>
-                       {
-                          AddCategoriesInRecipe listCategoriesInRecipe= new AddCategoriesInRecipe();
+                return addCategories ??= new RelayCommand((o) =>
+                {
+                    AddCategoriesInRecipe listCategoriesInRecipe= new AddCategoriesInRecipe();
                           
-                          if (listCategoriesInRecipe.ShowDialog()==true)
-                          {
-                              this.Categories.Clear();
-                               foreach (var category in listCategoriesInRecipe.context.AddCategories)
-                              {
-                                  this.Categories.Add(new ListCategory()
-                                  {
-                                      Category = category
-                                  });
-                              }
-                          }
+                    if (listCategoriesInRecipe.ShowDialog()==true)
+                    {
+                        this.Categories.Clear();
+                        foreach (var category in listCategoriesInRecipe.context.AddCategories)
+                        {
+                            this.Categories.Add(new ListCategory()
+                            {
+                                Category = category
+                            });
+                        }
+                    }
                           
 
-                       }));
+                });
             }
         }
 
+       
+
+
+
+        public RelayCommand DeleteIngridients
+        {
+            get
+            {
+                return deleteIngridients ??= new RelayCommand((seletedItem) =>
+                {
+                    var ingridient = seletedItem as RecipeIngridient;
+                    this.Ingridients.Remove(ingridient);
+                });
+            }
+        }
+
+        public RelayCommand DeleteInstructions
+        {
+            get
+            {
+                return deleteInstruction ??= (deleteInstruction= new RelayCommand((seletedItem) =>
+                {
+                  
+                    var instruction = seletedItem as Instruction;
+                    this.Instructions.Remove(instruction);
+                }));
+            }
+        }
         public RelayCommand AddIngridient
         {
             get
             {
-                return addIngridient ??
-                       (addIngridient = new RelayCommand((o) => { Ingridients.Add(new RecipeIngridient()
-                       {
-                           Product = new Product(),
-                           MeasurementUnit = new MeasurementUnit()
-                       }); }));
+                return addIngridient ??= new RelayCommand((o) => { Ingridients.Add(new RecipeIngridient()
+                {
+                    Product = new Product(),
+                    MeasurementUnit = new MeasurementUnit()
+                }); });
             }
         }
 
@@ -165,8 +194,7 @@ namespace RecipeBook.viewModels
         {
             get
             {
-                return addInstruction ??
-                       (addInstruction = new RelayCommand((o) => { Instructions.Add(new Instruction()); }));
+                return addInstruction ??= new RelayCommand((o) => { Instructions.Add(new Instruction()); });
             }
         }
 
@@ -202,38 +230,32 @@ namespace RecipeBook.viewModels
         {
             get
             {
-                return saveChanges ??
-                       (saveChanges = new RelayCommand((o) =>
-                       {
-                           if (Ingridients == null)
-                           {
-                               MessageBox.Show("Нужен хотя бы один ингридиент");
-                               return;
-                           }
+                return saveChanges ??= new RelayCommand((o) =>
+                {
+                 
+                    if (this.Image != null )
+                    {
+                        if (Path.IsPathFullyQualified(this.Image))
+                        {
+                            this.Image = CopyAndSaveImages(new Uri(this.Image).LocalPath);
+                        }
+                    }
 
-                           if (this.Image != null )
-                           {
-                               if (Path.IsPathFullyQualified(this.Image))
-                               {
-                                   this.Image = CopyAndSaveImages(new Uri(this.Image).LocalPath);
-                               }
-                           }
-
-                           foreach (var image in Instructions)
-                           {
-                               if (image.ImageStep != null )
-                               {
-                                   if (Path.IsPathFullyQualified(image.ImageStep))
-                                   {
-                                       image.ImageStep = CopyAndSaveImages(new Uri(image.ImageStep).LocalPath);
-                                   }
-                               }
-                           }
-                           this.recipe.Instructions = Instructions.ToList();
-                           this.recipe.ListCategories = Categories.ToList();
-                           this.recipe.RecipeIngridients = Ingridients.ToList();
+                    foreach (var image in Instructions)
+                    {
+                        if (image.ImageStep != null )
+                        {
+                            if (Path.IsPathFullyQualified(image.ImageStep))
+                            {
+                                image.ImageStep = CopyAndSaveImages(new Uri(image.ImageStep).LocalPath);
+                            }
+                        }
+                    }
+                    this.recipe.Instructions = Instructions.ToList();
+                    this.recipe.ListCategories = Categories.ToList();
+                    this.recipe.RecipeIngridients = CheckOrCreateProductAndMesurement(Ingridients.ToList());
                            
-                       }));
+                });
             }
         }
 
@@ -268,6 +290,32 @@ namespace RecipeBook.viewModels
 
         }
 
-
+        private ICollection<RecipeIngridient> CheckOrCreateProductAndMesurement(ICollection<RecipeIngridient> ingridients)
+        {
+            foreach (var ingridient in ingridients)
+            {
+                var product = App.dbContext.Products.Where(x => x.Name == ingridient.Product.Name).FirstOrDefault();
+                var measurement=App.dbContext.MeasurementUnits.Where(x=>x.Name==ingridient.MeasurementUnit.Name).FirstOrDefault();
+                if (product!=null)
+                {
+                    ingridient.Product = product;
+                }
+                if (product == null)
+                {
+                    App.dbContext.Products.Add(ingridient.Product);
+                   
+                }
+                if (measurement != null)
+                {
+                    ingridient.MeasurementUnit = measurement;
+                }
+                if (measurement==null)
+                {
+                    App.dbContext.MeasurementUnits.Add(ingridient.MeasurementUnit);
+                }
+                App.dbContext.SaveChanges();
+            }
+            return ingridients;
+        }
     }
 }

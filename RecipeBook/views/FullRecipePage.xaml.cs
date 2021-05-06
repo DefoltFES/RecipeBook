@@ -39,5 +39,10 @@ namespace RecipeBook.views
             }
             PrintButton.Visibility = Visibility.Visible;
         }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

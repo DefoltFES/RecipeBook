@@ -90,7 +90,7 @@ namespace RecipeBook.databaseClasses
 
             modelBuilder.Entity<Instruction>(entity =>
             {
-                entity.HasKey(e => e.IdInstruction );
+                entity.HasKey(e => e.IdInstruction);
 
                 entity.ToTable("instructions");
 
@@ -105,7 +105,7 @@ namespace RecipeBook.databaseClasses
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.Instructions)
                     .HasForeignKey(d => d.IdRecipe)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<ListCategory>(entity =>
