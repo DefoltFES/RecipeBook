@@ -30,7 +30,7 @@
                             <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Все рецепты"/>
                         </StackPanel>
                         </Button>
-                        <Button Click="AllRecipes_OnClick" x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
+                        <Button Click="AllBooks_OnClick" x:Name="AllBooks" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
                             <StackPanel   Orientation="Horizontal">
                             <Path Width="30" Height="40"  Fill="{StaticResource MainColor}" Data="{StaticResource Book}" Margin="0,0,10,0" Stretch="Fill">
                             </Path>

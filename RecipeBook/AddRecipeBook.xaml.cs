@@ -10,27 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
 using RecipeBook.viewModels;
 
-namespace RecipeBook.pages
+namespace RecipeBook
 {
     /// <summary>
-    /// Interaction logic for BooksPage.xaml
+    /// Interaction logic for AddRecipeBook.xaml
     /// </summary>
-    public partial class BooksPage : Page
+    public partial class AddRecipeBook : Window
     {
-        public BooksPage()
+        public AddRecipeBookViewModel Context { get; private set; }
+        public AddRecipeBook()
         {
             InitializeComponent();
-            DataContext=new BookPageViewModel();
-        }
-
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-            
+            Context = new AddRecipeBookViewModel();
+            DataContext = Context;
         }
     }
 }

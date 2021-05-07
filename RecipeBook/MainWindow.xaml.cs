@@ -45,9 +45,9 @@ namespace RecipeBook
             MainFrame.Navigate(new RecipePage());
         }
 
-        private void CreateCategory_OnClick(object sender, RoutedEventArgs e)
+        private void AllBooks_OnClick(object sender, RoutedEventArgs e)
         {
-         
+            MainFrame.Navigate(new BooksPage());
         }
     }
 }

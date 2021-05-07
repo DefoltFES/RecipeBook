@@ -47,7 +47,6 @@
                                     <TextBlock TextTrimming="WordEllipsis" Height="74" TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="WrapWithOverflow" FontSize="16" Text="{Binding Description}">
                                     </TextBlock>
                                 </StackPanel>
-
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

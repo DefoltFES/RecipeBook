@@ -33,13 +33,7 @@ namespace RecipeBook.viewModels
         private RelayCommand deleteIngridients;
         private RelayCommand deleteInstruction;
         private RelayCommand deleteCategories;
-        public CreateOrEditRecipeViewModel(Recipe r)
-        {
-            recipe = r;
-            Categories = new ObservableCollection<ListCategory>(r.ListCategories);
-            Ingridients=new ObservableCollection<RecipeIngridient>(r.RecipeIngridients);
-            Instructions=new ObservableCollection<Instruction>(r.Instructions);
-        }
+       
         public string Name
         {
             get { return recipe.Name; }
@@ -150,10 +144,6 @@ namespace RecipeBook.viewModels
             }
         }
 
-       
-
-
-
         public RelayCommand DeleteIngridients
         {
             get
@@ -258,7 +248,13 @@ namespace RecipeBook.viewModels
                 });
             }
         }
-
+        public CreateOrEditRecipeViewModel(Recipe r)
+        {
+            recipe = r;
+            Categories = new ObservableCollection<ListCategory>(r.ListCategories);
+            Ingridients = new ObservableCollection<RecipeIngridient>(r.RecipeIngridients);
+            Instructions = new ObservableCollection<Instruction>(r.Instructions);
+        }
         private string CopyAndSaveImages(string path)
         {
             if (path != null)
@@ -289,6 +285,7 @@ namespace RecipeBook.viewModels
             }
 
         }
+
 
         private ICollection<RecipeIngridient> CheckOrCreateProductAndMesurement(ICollection<RecipeIngridient> ingridients)
         {

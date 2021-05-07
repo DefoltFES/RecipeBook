@@ -12,7 +12,12 @@
         <StackPanel  HorizontalAlignment="Stretch" Margin="37,21,37,0" Orientation="Vertical">
             <DockPanel  HorizontalAlignment="Stretch" >
                 <TextBlock HorizontalAlignment="Left" FontSize="36" FontFamily="{StaticResource Regular }" Foreground="{StaticResource TextColor}">Все книги</TextBlock>
-                <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                <Button Command="{Binding AddCommand}" DockPanel.Dock="Right"    Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch" BorderBrush="Transparent">
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Создать</TextBlock>
+                    </Border>
+                </Button>
+                    <Button DockPanel.Dock="Right" x:Name="BackButton" Click="BackButton_OnClick" Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Назад
                         </TextBlock>
@@ -20,7 +25,7 @@
                 </Button>
             </DockPanel>
 
-            <ListView  Margin="0" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
+                <ListView  Margin="0" ItemsSource="{Binding Books}" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -31,11 +36,11 @@
                     <DataTemplate>
                         <Border HorizontalAlignment="Left" Width="344"  Margin="10" Padding="34,17,34,17" BorderBrush="{StaticResource MainColor}" BorderThickness="1" CornerRadius="15">
                             <StackPanel >
-                                <TextBlock HorizontalAlignment="Left" Width="245" TextWrapping="Wrap" FontSize="24" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="20 рецептов пасхального пирога"></TextBlock>
-                                <Image HorizontalAlignment="Stretch" Source="https://via.placeholder.com/274x245" Margin="0,10,0,0" Width="274" Height="245"></Image>
+                                <TextBlock HorizontalAlignment="Left" Width="245"  TextWrapping="Wrap" FontSize="24" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="{Binding Name}"></TextBlock>
+                                <Image HorizontalAlignment="Stretch" Source="{Binding Image,TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}" Margin="0,10,0,0" Width="274" Height="245"></Image>
                                 <TextBlock Margin="0,13,0,9" HorizontalAlignment="Left" FontSize="24" FontFamily="{StaticResource Regular}" Text="Описание"></TextBlock>
-                                <TextBlock Width="270"  TextWrapping="Wrap" FontSize="18" FontFamily="{StaticResource Regular}">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis suspendisse sed neque sed. Proin ut suspendisse faucibus convallis lacinia interdum libero sollicitudin id. Adipiscing urna augue libero tellus. Tincidunt amet neque, mattis et.
+                                <TextBlock Width="270" TextTrimming="WordEllipsis" TextWrapping="Wrap" FontSize="18" Text="{Binding Description}" FontFamily="{StaticResource Regular}">
+                                     
                                 </TextBlock>
                             </StackPanel>
                         </Border>
