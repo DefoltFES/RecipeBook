@@ -28,5 +28,10 @@ namespace RecipeBook
             Context=new CreateOrEditBookViewModel(book);
             DataContext = Context;
         }
+
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }

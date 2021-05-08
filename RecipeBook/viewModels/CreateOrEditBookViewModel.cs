@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using RecipeBook.databaseClasses;
 using RecipeBook.service;
@@ -66,10 +67,13 @@ namespace RecipeBook.viewModels
         private RelayCommand addImage;
         private RelayCommand saveChanges;
         private RelayCommand addRecipes;
+        private RelayCommand deleteRecipe;
         public CreateOrEditBookViewModel(Book book)
         {
-            this.book = book;
-            Recipes=new ObservableCollection<BookRecipe>(Book.Recipes);
+            this.book = book; 
+            App.dbContext.Books.Where(b=>b.IdBook==book.IdBook).Include(x=>x.Recipes).ThenInclude(r=>r.Recipe).Load();
+            Recipes = new ObservableCollection<BookRecipe>(book.Recipes);
+         
         }
 
         public RelayCommand AddImage
@@ -99,6 +103,21 @@ namespace RecipeBook.viewModels
                        }));
             }
         }
+
+        public RelayCommand DeleteRecipe
+        {
+            get { return deleteRecipe ??= new RelayCommand(selectedItem =>
+            {
+                if (selectedItem == null)
+                {
+                    return;
+                }
+
+                var item = selectedItem as BookRecipe;
+                Recipes.Remove(item);
+            }); }
+        }
+
         public RelayCommand SaveChanges
         {
             get
@@ -129,10 +148,13 @@ namespace RecipeBook.viewModels
                     AddRecipeBook listRecipes=new AddRecipeBook();
                     if (listRecipes.ShowDialog()==true)
                     {
-                        //foreach (var category in listRecipes)
-                        //{
-                            
-                        //}
+                        foreach (var category in listRecipes.Context.AddRecipes)
+                        {
+                            this.Recipes.Add(new BookRecipe()
+                            {
+                                Recipe = category
+                            });
+                        }
                     }
                 }); 
 
@@ -154,7 +176,7 @@ namespace RecipeBook.viewModels
                 if (Path.IsPathFullyQualified(path))
                 {
                     File.Copy(path, newImageSource, true);
-                    return Path.Combine(@"images\recipes\", nameImage);
+                    return Path.Combine(@"images\book\", nameImage);
                 }
                 else
                 {

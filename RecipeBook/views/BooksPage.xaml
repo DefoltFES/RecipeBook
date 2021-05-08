@@ -26,8 +26,14 @@
             </DockPanel>
 
                 <ListView  Margin="0" ItemsSource="{Binding Books}" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
-                      ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
-                <ListView.ItemsPanel>
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Command="{Binding EditCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Редактировать"></MenuItem>
+                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel    HorizontalAlignment="Center" Orientation="Horizontal"  ScrollViewer.VerticalScrollBarVisibility="Disabled"></WrapPanel>
                     </ItemsPanelTemplate>

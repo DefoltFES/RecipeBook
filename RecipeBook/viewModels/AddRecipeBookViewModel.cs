@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,18 @@ namespace RecipeBook.viewModels
 {
     public class AddRecipeBookViewModel:ViewModel
     {
-        public ICollection<Recipe> RecipesCategory { get; set; }
+        private ObservableCollection<Recipe> recipeCategory;
+
+        public ObservableCollection<Recipe> RecipesCategory
+        {
+            get => recipeCategory;
+            set
+            {
+                recipeCategory = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICollection<Recipe> AddRecipes { get; set; }
         public ICollection<Category> AllCategories { get; set; }
 
@@ -18,10 +30,12 @@ namespace RecipeBook.viewModels
         {
             AllCategories = App.dbContext.Categories.ToList();
             AddRecipes=new List<Recipe>();
-            RecipesCategory=new List<Recipe>();
+            RecipesCategory=new ObservableCollection<Recipe>();
         }
 
         private RelayCommand changeCategory;
+
+        private RelayCommand saveChanges;
 
         public RelayCommand ChangeCategory
         {
@@ -32,16 +46,18 @@ namespace RecipeBook.viewModels
                     var item=  selectedItem as Category;
                     if (item.IdCategory == 1)
                     {
-                        RecipesCategory = App.dbContext.Recipes.Where(x => x.ListCategories.Count == 0).ToList();
+                        RecipesCategory = new ObservableCollection<Recipe>(App.dbContext.Recipes.Where(x => x.ListCategories.Count == 0));
                     }
                     else
                     {
-                        RecipesCategory = App.dbContext.Categories.Find(item.IdCategory).ListCategories
-                            .Select(x => x.Recipe).ToList();
+                        RecipesCategory = new ObservableCollection<Recipe>(App.dbContext.Categories.Find(item.IdCategory).ListCategories
+                            .Select(x => x.Recipe).ToList());
                     }
                 });
             }
         }
+
+      
 
     }
 }

@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using RecipeBook.databaseClasses;
 using RecipeBook.service;
@@ -251,9 +252,15 @@ namespace RecipeBook.viewModels
         public CreateOrEditRecipeViewModel(Recipe r)
         {
             recipe = r;
+            App.dbContext.Recipes.Where(x=>x.IdRecipe==r.IdRecipe).Include(b=>b.Instructions).Include(x=>x.RecipeIngridients).ThenInclude(b=>b.Product).Load();
             Categories = new ObservableCollection<ListCategory>(r.ListCategories);
-            Ingridients = new ObservableCollection<RecipeIngridient>(r.RecipeIngridients);
-            Instructions = new ObservableCollection<Instruction>(r.Instructions);
+            Instructions =
+                new ObservableCollection<Instruction>(r.Instructions);
+            Ingridients =
+                    new ObservableCollection<RecipeIngridient>(r.RecipeIngridients);
+            
+            
+            
         }
         private string CopyAndSaveImages(string path)
         {

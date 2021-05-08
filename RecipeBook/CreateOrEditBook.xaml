@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeBook"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CreateOrEditBook" d:Height="2000" d:Width="1000">
     <Grid>
@@ -25,7 +26,7 @@
                 <ListView Margin="0,10,0,0" x:Name="ListRecipes" ItemsSource="{Binding Recipes}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Transparent"  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" >
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Command="{Binding DeleteCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
+                            <MenuItem Command="{Binding DeleteRecipe}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" Header="Удалить"></MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
                     <ListView.ItemsPanel>
@@ -36,20 +37,31 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="270" Height="446" Background="{StaticResource MainColor}">
-                                <Image HorizontalAlignment="Stretch" Stretch="Fill" VerticalAlignment="Top" Height="270"  Source="{Binding Image, TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}"></Image>
+                                <Image HorizontalAlignment="Stretch" Stretch="Fill" VerticalAlignment="Top" Height="270"  Source="{Binding Recipe.Image, TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}"></Image>
                                 <StackPanel Margin="12,5,12,36">
-                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="22" Text="{Binding Name}"></TextBlock>
-                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding CookTime, Converter={StaticResource ConvectorTime}}"></TextBlock>
-                                    <TextBlock TextTrimming="WordEllipsis" Height="74" TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="WrapWithOverflow" FontSize="16" Text="{Binding Description}">
+                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="22" Text="{Binding Recipe.Name}"></TextBlock>
+                                    <TextBlock  TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="Wrap" FontSize="18" Text="{Binding Recipe.CookTime, Converter={StaticResource ConvectorTime}}"></TextBlock>
+                                    <TextBlock TextTrimming="WordEllipsis" Height="74" TextAlignment="Left" FontFamily="{StaticResource Medium}" Foreground="{StaticResource RecipeTextColor}" TextWrapping="WrapWithOverflow" FontSize="16" Text="{Binding Recipe.Description}">
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Command="{Binding AddRecipes}"  Margin="0,20,0,0"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                <Button Command="{Binding AddRecipe}"  Margin="0,20,0,0"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
                     <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                         <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Добавить рецепты</TextBlock>
+                    </Border>
+                </Button>
+                <Button   Margin="0,20,0,0" Click="SaveChanges"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Click">
+                            <b:InvokeCommandAction 
+                                Command="{Binding SaveChanges}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                    <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Сохранить книгу</TextBlock>
                     </Border>
                 </Button>
             </StackPanel>

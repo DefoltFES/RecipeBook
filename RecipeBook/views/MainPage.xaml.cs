@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using RecipeBook.databaseClasses;
 using RecipeBook.pages;
 using RecipeBook.viewModels;
+using RecipeBook.views;
 
 namespace RecipeBook
 {
@@ -38,7 +39,8 @@ namespace RecipeBook
 
         private void LastBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            var item = LastBooks.SelectedItem as Book;
+            this.NavigationService.Navigate(new FullBookPage(item));
         }
 
         private void PopularCategories_MouseDoubleClick(object sender, MouseButtonEventArgs e)

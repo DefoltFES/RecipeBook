@@ -4,12 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeBook"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="AddRecipeBook" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <ComboBox ItemsSource="{Binding AllCategories}"   HorizontalAlignment="Left"  Width="220">
-            <ComboBox.ItemTemplate>
+        <ScrollViewer>
+        <StackPanel Margin="20,20,20,20">
+            <ComboBox x:Name="Categories" ItemsSource="{Binding AllCategories}"   HorizontalAlignment="Left"  Width="220">
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="SelectionChanged">
+                        <b:InvokeCommandAction 
+                            Command="{Binding ChangeCategory}" CommandParameter="{Binding  ElementName=Categories,Path=SelectedItem}"/>
+                    </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock  FontSize="20"  Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="{Binding Name}"></TextBlock>
                     </DataTemplate>
@@ -35,11 +43,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button   Margin="0,20,0,0"  Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+        <Button   Margin="0,20,0,0" Click="AddRecipesInList"   Background="Transparent"  HorizontalAlignment="Left"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
             <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
                 <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Добавить рецепты</TextBlock>
             </Border>
         </Button>
-        </StackPanel>
+            <Button  Click="SaveChanges"  Margin="0,20,0,0"  Background="Transparent"  HorizontalAlignment="Right"  VerticalAlignment="Stretch"   BorderBrush="Transparent">
+                <Border Padding="30,8,30,8" CornerRadius="20" HorizontalAlignment="Left" Background="{StaticResource MainColor}" >
+                        <TextBlock FontSize="20" Foreground="White" FontFamily="{StaticResource SemiBold}">Сохранить рецепты</TextBlock>
+                </Border>
+            </Button>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

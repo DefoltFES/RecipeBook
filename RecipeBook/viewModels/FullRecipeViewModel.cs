@@ -15,8 +15,8 @@ namespace RecipeBook.viewModels
 
         public FullRecipeViewModel(Recipe r)
         {
-            App.dbContext.Recipes.Where(b=>b.IdRecipe==r.IdRecipe).Include(x=>x.RecipeIngridients).ThenInclude(x=>x.MeasurementUnit).ThenInclude(b=>b.Name);
-            recipe = App.dbContext.Recipes.Find(r.IdRecipe);
+            App.dbContext.Recipes.Where(x => x.IdRecipe == r.IdRecipe).Include(b => b.Instructions).Include(x => x.RecipeIngridients).ThenInclude(b => b.Product).Load();
+            recipe = r;
         }
 
         public string Name
