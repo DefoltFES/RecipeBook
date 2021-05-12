@@ -24,10 +24,11 @@ namespace RecipeBook.views
     /// </summary>
     public partial class FullBookPage : Page
     {
+        
         public FullBookPage(Book book)
         {
             InitializeComponent();
-            DataContext=new FullBookViewModel(book);
+            DataContext =new FullBookViewModel(book);
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -37,19 +38,18 @@ namespace RecipeBook.views
 
         private void PrintButton_OnClick(object sender, RoutedEventArgs e)
         {
-            PrintDialog printDialog = new PrintDialog();
-
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintVisual(MainPage,"ЛИСТ");
-                printDialog.PrintVisual(MainPage, "ЛИСТ");
-                
-            }
+           
+            this.NavigationService.Navigate(new PrintBookPage(this.DataContext as FullBookViewModel));
         }
 
         private void Recipes_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = Recipes.SelectedItem as BookRecipe;
+            if (Recipes.SelectedItem !=null)
+            {
+                var item = Recipes.SelectedItem as BookRecipe;
+                this.NavigationService.Navigate(new FullRecipePage(item.Recipe));
+            }
+         
         }
     }
 }

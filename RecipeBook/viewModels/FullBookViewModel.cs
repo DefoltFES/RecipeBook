@@ -8,13 +8,16 @@ using RecipeBook.databaseClasses;
 
 namespace RecipeBook.viewModels
 {
-    class FullBookViewModel
+    public class FullBookViewModel
     {
         private Book book;
-
+        public Book Book
+        {
+            get => book;
+        }
         public FullBookViewModel(Book book)
         {
-            App.dbContext.Books.Where(b => b.IdBook == book.IdBook).Include(x => x.Recipes).ThenInclude(r => r.Recipe).Load();
+            App.dbContext.Books.Where(b => b.IdBook == book.IdBook).Include(x => x.Recipes).ThenInclude(r => r.Recipe).ThenInclude(x=>x.Instructions).Load();
             this.book= book;
         }
 

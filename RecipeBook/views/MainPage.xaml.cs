@@ -39,14 +39,20 @@ namespace RecipeBook
 
         private void LastBooks_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = LastBooks.SelectedItem as Book;
-            this.NavigationService.Navigate(new FullBookPage(item));
+            if (LastBooks.SelectedItem != null)
+            {
+                var item = LastBooks.SelectedItem as Book;
+                this.NavigationService.Navigate(new FullBookPage(item));
+            }
         }
 
         private void PopularCategories_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = PopularCategories.SelectedItem as Category;
-            this.NavigationService.Navigate(new RecipePage(item));
+            if (PopularCategories.SelectedItem != null)
+            {
+                var item = PopularCategories.SelectedItem as Category;
+                this.NavigationService.Navigate(new RecipePage(item));
+            }
         }
     }
 }

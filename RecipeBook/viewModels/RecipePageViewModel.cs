@@ -147,7 +147,7 @@ namespace RecipeBook.viewModels
 
                         if (recipe != null)
                         {
-                            if (recipe.Image!= editRecipe.Context.Image)
+                            if (recipe.Image!= editRecipe.Context.Image && recipe.Image ==null)
                             {
                                 var path = System.AppDomain.CurrentDomain.BaseDirectory + recipe.Image;
                                 File.Delete(path);
@@ -156,7 +156,7 @@ namespace RecipeBook.viewModels
                             {
                                 foreach (var imageInstruction in editRecipe.Context.Instructions)
                                 {
-                                    if (image.ImageStep!=imageInstruction.ImageStep )
+                                    if (image.ImageStep!=imageInstruction.ImageStep && image.ImageStep == null)
                                     {
                                         File.Delete(System.AppDomain.CurrentDomain.BaseDirectory + image.ImageStep);
                                     }

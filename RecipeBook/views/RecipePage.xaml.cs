@@ -44,7 +44,10 @@ namespace RecipeBook.pages
 
         private void ListRecipes_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.NavigationService.Navigate(new FullRecipePage(ListRecipes.SelectedItem as Recipe));
+            if (ListRecipes.SelectedItem != null)
+            {
+                this.NavigationService.Navigate(new FullRecipePage(ListRecipes.SelectedItem as Recipe));
+            }
         }
     }
 }

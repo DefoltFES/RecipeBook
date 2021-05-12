@@ -25,7 +25,7 @@
                 </Button>
             </DockPanel>
 
-                <ListView  Margin="0" ItemsSource="{Binding Books}" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" x:Name="Books" BorderBrush="Transparent"
+                <ListView  Margin="0" ItemsSource="{Binding Books}" Padding="0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" MouseDoubleClick="Books_OnMouseDoubleClick" x:Name="Books" BorderBrush="Transparent"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Single">
                     <ListView.ContextMenu>
                         <ContextMenu>
@@ -43,7 +43,7 @@
                         <Border HorizontalAlignment="Left" Width="344"  Margin="10" Padding="34,17,34,17" BorderBrush="{StaticResource MainColor}" BorderThickness="1" CornerRadius="15">
                             <StackPanel >
                                 <TextBlock HorizontalAlignment="Left" Width="245"  TextWrapping="Wrap" FontSize="24" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="{Binding Name}"></TextBlock>
-                                <Image HorizontalAlignment="Stretch" Source="{Binding Image,TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}" Margin="0,10,0,0" Width="274" Height="245"></Image>
+                                <Image Stretch="Fill" HorizontalAlignment="Stretch" Source="{Binding Image,TargetNullValue={StaticResource MiddleImage},Converter={StaticResource ImageConvertor}}" Margin="0,10,0,0" Width="274" Height="245"></Image>
                                 <TextBlock Margin="0,13,0,9" HorizontalAlignment="Left" FontSize="24" FontFamily="{StaticResource Regular}" Text="Описание"></TextBlock>
                                 <TextBlock Width="270" TextTrimming="WordEllipsis" TextWrapping="Wrap" FontSize="18" Text="{Binding Description}" FontFamily="{StaticResource Regular}">
                                      

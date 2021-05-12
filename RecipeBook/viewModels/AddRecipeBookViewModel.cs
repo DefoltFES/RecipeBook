@@ -35,7 +35,6 @@ namespace RecipeBook.viewModels
 
         private RelayCommand changeCategory;
 
-        private RelayCommand saveChanges;
 
         public RelayCommand ChangeCategory
         {

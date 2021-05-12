@@ -33,18 +33,8 @@ namespace RecipeBook.views
 
         private void PrintButtonClick(object sender, RoutedEventArgs e)
         {
-            PrintButton.Visibility = Visibility.Hidden;
-            BackButton.Visibility = Visibility.Hidden;
-            double oldWidth = this.Width;
-            this.Width = 1240;
-            PrintDialog printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintVisual(Print,"Рецепт");
-            }
-            PrintButton.Visibility = Visibility.Visible;
-            BackButton.Visibility = Visibility.Visible;
-            this.Width = oldWidth;
+          
+            this.NavigationService.Navigate(new PrintRecipePage(this.DataContext as FullRecipeViewModel));
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)

@@ -1,0 +1,75 @@
+﻿<Page x:Class="RecipeBook.views.PrintRecipePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeBook.views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FullRecipePagePrint" Loaded="FullRecipePagePrint_OnLoaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DocumentViewer>
+            <FixedDocument x:Name="Document">
+                <PageContent>
+                    <FixedPage Width="1100" Height="1517">
+                        <StackPanel  Width="1000"  HorizontalAlignment="Stretch"  x:Name="Print" Margin="70,19,70,19">
+                            <TextBlock  Foreground="{StaticResource TextColor}" FontSize="36" FontFamily="{StaticResource Regular}" Text="{Binding Name}"></TextBlock>
+            <DockPanel HorizontalAlignment="Stretch"   Margin="0,33,0,0">
+                <Image Stretch="Fill" Width="704" Height="420" DockPanel.Dock="Left" HorizontalAlignment="Left" Source="{Binding Image,TargetNullValue={StaticResource BigImage},Converter={StaticResource ImageConvertor},Mode=TwoWay}"></Image>
+                <StackPanel  Margin="10,0,0,0" DockPanel.Dock="Right">
+                    <TextBlock  FontSize="20"  Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="{Binding CookTime,StringFormat=Время:{0} мин}"></TextBlock>
+                    <TextBlock FontSize="20" Margin="0,20,0,20" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}">Категории</TextBlock>
+                    <ItemsControl x:Name="ListCategories"   ItemsSource="{Binding Categories}" BorderThickness="0" Background="Transparent" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock  FontSize="20" Text="{Binding Category.Name}" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}"></TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock FontSize="20" Margin="0,20,0,20" Foreground="{StaticResource TextColor}" FontFamily="{StaticResource Regular}" Text="{Binding NumService,StringFormat={}{0} порций }"></TextBlock>
+                </StackPanel>
+            </DockPanel>
+            <StackPanel  Margin="0,20,0,0">
+                <TextBlock FontSize="24"  Foreground="{StaticResource TextColor}" FontFamily="{StaticResource SemiBold}">Описание</TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="24" TextAlignment="Justify" HorizontalAlignment="Left" Foreground="{StaticResource TextColor}" Margin="0,10,0,0" FontFamily="{StaticResource SemiBold}" Text="{Binding Description}"/>
+            </StackPanel>
+            <Border Margin="0,20,0,20" Padding="18,15,18,40" CornerRadius="5" Background="{StaticResource MainColor}">
+                <StackPanel>
+                    <TextBlock  FontSize="36" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}">Ингридиенты</TextBlock>
+                    <ItemsControl ItemsSource="{Binding Ingridients}" Background="Transparent" BorderThickness="0" Margin="0,22,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock   FontSize="25" FontFamily="{StaticResource SemiBold}" Foreground="{StaticResource RecipeTextColor}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} – {1} {2}">
+                                            <Binding Path="Product.Name"/>
+                                            <Binding Path="Amount"/>
+                                            <Binding Path="MeasurementUnit.Name"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+                    </StackPanel>
+                    </FixedPage>
+                </PageContent>
+            </FixedDocument>
+        </DocumentViewer>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button x:Name="BackButton" Click="BackButton_OnClick" Margin="0,0,10,0"  HorizontalAlignment="Right" BorderThickness="0" Width="55" Height="55" Background="Transparent" >
+                <Border  Padding="5" CornerRadius="5" Background="{StaticResource MainColor}" >
+                    <Path HorizontalAlignment="Center" Fill="Black" Data="{StaticResource Back}" Width="40" Height="40"></Path>
+                </Border>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

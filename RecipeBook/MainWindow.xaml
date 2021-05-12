@@ -44,19 +44,13 @@
                         </StackPanel>
                         </Button>
 
-                        <Button x:Name="Search" Margin="25,0,0,20" HorizontalAlignment="Left" BorderBrush="Transparent" Background="Transparent">
-                        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal">
-                            <Path Fill="{StaticResource MainColor}" Data="{StaticResource Search}" Height="40" Width="30" Stretch="Fill" Margin="0,0,10,0"/>
-                            <TextBlock Foreground="{StaticResource MainColor}"  HorizontalAlignment="Center" FontSize="24" FontFamily="{StaticResource Medium}" Text="Поиск"/>
-                        </StackPanel>
-                        </Button>
                     </StackPanel>
                  
                 </StackPanel>
 
             </Border>
         </Grid>
-        <Frame  x:Name="MainFrame" VerticalAlignment="Stretch"  Grid.Column="1" >
+        <Frame  x:Name="MainFrame" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch"  Grid.Column="1" >
 
         </Frame>
     </Grid>

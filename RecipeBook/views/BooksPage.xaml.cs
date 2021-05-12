@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RecipeBook.databaseClasses;
 using RecipeBook.viewModels;
+using RecipeBook.views;
 
 namespace RecipeBook.pages
 {
@@ -31,6 +33,14 @@ namespace RecipeBook.pages
         {
             NavigationService.GoBack();
             
+        }
+
+        private void Books_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (Books.SelectedItem != null)
+            {
+                this.NavigationService.Navigate(new FullBookPage(Books.SelectedItem as Book));
+            }
         }
     }
 }

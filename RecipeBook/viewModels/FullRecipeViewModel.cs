@@ -9,7 +9,7 @@ using RecipeBook.databaseClasses;
 
 namespace RecipeBook.viewModels
 {
-    class FullRecipeViewModel:ViewModel
+    public class FullRecipeViewModel:ViewModel
     {
         private Recipe recipe;
 
